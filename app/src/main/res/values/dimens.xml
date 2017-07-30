@@ -1,16 +1,13 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
-
     <dimen name="card_text_size">24sp</dimen>
     <dimen name="card_more_text_size">20sp</dimen>
-
 
     <!--More Details Card-->
     <dimen name="more_details_card_layout_margin">56dp</dimen>
 
+    <!--Add Card-->
+    <dimen name="add_card_margin">30dp</dimen>
 
     <!--Button-->
-
     <dimen name="button_padding">4dp</dimen>
-
 </resources>

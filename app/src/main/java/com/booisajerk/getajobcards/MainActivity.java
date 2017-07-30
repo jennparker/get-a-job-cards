@@ -14,16 +14,19 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Parker" + MainActivity.class.getSimpleName();
 
+    //TODO add app bar to card screen
     //TODO create a save question for later button
     //TODO create a add a new question button
     //TODO create a back button
+    //TODO switch to fragments
     //TODO handle onRotation
-    //TODO make toolbar displayed on all screens
-    //TODO store questions in SQL
-    //TODO how to use a url without messing up parsing
     //TODO card flip animation
-    //TODO Switch to fragments
-    //TODO Use ViewPager for cards
+    //TODO use ViewPager for cards
+    //TODO store questions in SQL db
+    //TODO option to select by category
+    //TODO how to use a url without messing up parsing
+    //TODO shuffle questions
+    //TODO how to control new line break
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

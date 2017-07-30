@@ -88,9 +88,7 @@ public class FileHelper extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 //TODO add alert dialog here
-
 
                 Intent moreDetailsintent = new Intent(FileHelper.this, MoreDetailsActivity.class);
                 startActivity(moreDetailsintent);
