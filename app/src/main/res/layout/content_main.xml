@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:layout_margin="62dp"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.booisajerk.getajobcards.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <Button
+        android:id="@+id/categorySelectionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/rounded_button"
+        android:paddingLeft="@dimen/button_padding"
+        android:paddingRight="@dimen/button_padding"
+        android:text="@string/select_categories_text" />
+
+    <Button
+        android:id="@+id/allCardsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/rounded_button"
+        android:paddingLeft="@dimen/button_padding"
+        android:paddingRight="@dimen/button_padding"
+        android:text="@string/want_all_button_text" />
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.booisajerk.getajobcards.FileHelper"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="45dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/questionNumberText"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="3" />
+
+        <TextView
+            android:id="@+id/categoryText"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/sampleCategoryText"
+            android:textColor="@color/textBackground" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cardQuestionText"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/sampleText"
+        android:textAlignment="center"
+        android:textSize="@dimen/card_text_size" />
+
+    <TextView
+        android:id="@+id/cardAnswerText"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/sampleText"
+        android:textAlignment="center"
+        android:textSize="@dimen/card_text_size"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/moreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="24dp"
+        android:text="@string/more_text"
+        android:visibility="invisible"
+        android:textColor="@color/textBackground"
+        android:textSize="@dimen/card_more_text_size" />
+
+    <Button
+        android:id="@+id/advanceButton"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
+        android:paddingLeft="@dimen/button_padding"
+        android:paddingRight="@dimen/button_padding"
+        android:text="@string/sampleButtonText" />
+
+</LinearLayout>
+
+
+

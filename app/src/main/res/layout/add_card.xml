@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question__title_text"
+        style="@style/TextEditTitleText" />
+
+    <EditText
+        android:id="@+id/question_text_add_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/question_hint_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/answer__title_text"
+        style="@style/TextEditTitleText" />
+
+    <EditText
+        android:id="@+id/answer_text_add_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/answer_hint_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more_title_text"
+        style="@style/TextEditTitleText" />
+
+    <EditText
+        android:id="@+id/more_text_add_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/more_hint_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category_title_text"
+        style="@style/TextEditTitleText" />
+
+
+    <EditText
+        android:id="@+id/category_text_add_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/more_hint_text" />
+
+
+</LinearLayout>

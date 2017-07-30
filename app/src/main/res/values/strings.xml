@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Get a Job Cards</string>
+    <string name="action_settings">Settings</string>
+    <string name="sampleText">I\'m the sample card text!</string>
+    <string name="sampleButtonText">I\'m a button!</string>
+    <string name="sampleCategoryText">Sample Category</string>
+    <string name="sampleNumberText">3</string>
+    <string name="show_answer_text">Show Answer</string>
+    <string name="nextCardButtonText">Next Card</string>
+    <string name="no_more_cards_button_text">There are no more cards.</string>
+    <string name="select_categories_text">Select Categories</string>
+    <string name="more_text">more</string>
+    <string name="sample_text_string">Sample more dialog text goes here.</string>
+    <string name="want_all_button_text">I want it all</string>
+
+
+    <!--Add Card Activity-->
+
+    <string name="question__title_text">Question</string>
+    <string name="answer__title_text">Answer</string>
+    <string name="more_title_text">Question</string>
+    <string name="category_title_text">Category</string>
+    <string name="more_hint_text">Add more details here</string>
+    <string name="answer_hint_text">Add answer text here</string>
+    <string name="question_hint_text">Add question text here</string>
+    <string name="category_hint_text">Add category text here</string>
+
+</resources>
