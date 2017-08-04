@@ -14,19 +14,20 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Parker" + MainActivity.class.getSimpleName();
 
-    //TODO add app bar to card screen
+    //TODO add app bar to card_activity screen
     //TODO create a save question for later button
     //TODO create a add a new question button
     //TODO create a back button
     //TODO switch to fragments
     //TODO handle onRotation
-    //TODO card flip animation
+    //TODO card_activity flip animation
     //TODO use ViewPager for cards
-    //TODO store questions in SQL db
     //TODO option to select by category
-    //TODO how to use a url without messing up parsing
     //TODO shuffle questions
     //TODO how to control new line break
+    //TODO add hyperlinks
+    //TODO add ability to click off more view
+    //TODO add id column
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "OnCreate called");
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, FileHelper.class);
-//                startActivity(intent);
-//            }
-//        });
 
         Button categorySelectionButton = (Button) findViewById(R.id.categorySelectionButton);
         categorySelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //TODO do something
+                //TODO display category checked text box
+
 
             }
         });
@@ -61,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         allCardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FileHelper.class);
+                Intent intent = new Intent(MainActivity.this, CardActivity.class);
                 startActivity(intent);
             }
         });

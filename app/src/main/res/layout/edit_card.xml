@@ -11,10 +11,10 @@
         android:text="@string/question_title_text" />
 
     <EditText
-        android:id="@+id/question_text_add_card"
+        android:id="@+id/question_text_edit_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/question_hint_text" />
+        android:hint="@string/edit_question_hint_text" />
 
     <TextView
         style="@style/TextEditTitleText"
@@ -23,10 +23,10 @@
         android:text="@string/answer_title_text" />
 
     <EditText
-        android:id="@+id/answer_text_add_card"
+        android:id="@+id/answer_text_edit_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/answer_hint_text" />
+        android:hint="@string/edit_answer_hint_text" />
 
     <TextView
         style="@style/TextEditTitleText"
@@ -35,10 +35,10 @@
         android:text="@string/more_title_text" />
 
     <EditText
-        android:id="@+id/more_text_add_card"
+        android:id="@+id/more_text_edit_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/more_hint_text" />
+        android:hint="@string/edit_more_hint_text" />
 
     <TextView
         style="@style/TextEditTitleText"
@@ -48,11 +48,10 @@
 
 
     <EditText
-        android:id="@+id/category_text_add_card"
+        android:id="@+id/category_text_edit_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Add category here" />
-
+        android:hint="@string/edit_category_hint_text" />
 
     <Button
         android:id="@+id/submit_button"
@@ -65,17 +64,5 @@
         android:paddingLeft="@dimen/button_padding"
         android:paddingRight="@dimen/button_padding"
         android:text="@string/submit_button_text" />
-
-    <Button
-        android:id="@+id/test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rounded_button"
-        android:paddingLeft="@dimen/button_padding"
-        android:paddingRight="@dimen/button_padding"
-        android:text="Show db contents in logcat" />
-
 
 </LinearLayout>

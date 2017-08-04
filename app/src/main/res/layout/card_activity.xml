@@ -3,12 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.booisajerk.getajobcards.FileHelper"
+    tools:context="com.booisajerk.getajobcards.CardActivity"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="45dp"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/card__options_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/card__delete_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"
+        android:visibility="invisible"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/card_edit_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"
+        android:visibility="invisible"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,6 +46,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:gravity="start"
+            android:visibility="invisible"
             android:text="3" />
 
         <TextView
@@ -60,8 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="24dp"
-        android:text="@string/more_text"
-        android:visibility="invisible"
+        android:text="@string/more_button_text"
         android:textColor="@color/textBackground"
         android:textSize="@dimen/card_more_text_size" />
 

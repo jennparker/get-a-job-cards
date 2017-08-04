@@ -13,7 +13,7 @@
     </style>
 
 
-    <style name="AppTheme.FloatingTheme" parent="AppTheme">
+    <style name="AppTheme.FloatingTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowIsFloating">true</item>
     </style>
 
@@ -31,7 +31,6 @@
         <item name="android:textSize">@dimen/card_more_text_size</item>
         <item name="android:paddingLeft">@dimen/button_padding</item>
         <item name="android:layout_marginTop">6dp</item>
-
     </style>
 
 </resources>

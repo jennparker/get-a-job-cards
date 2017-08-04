@@ -20,7 +20,7 @@
         android:background="@drawable/rounded_button"
         android:paddingLeft="@dimen/button_padding"
         android:paddingRight="@dimen/button_padding"
-        android:text="@string/select_categories_text" />
+        android:text="@string/select_category_text" />
 
     <Button
         android:id="@+id/allCardsButton"

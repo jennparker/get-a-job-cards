@@ -18,10 +18,8 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <activity
@@ -31,16 +29,23 @@
         </activity>
 
         <activity
-            android:name="com.booisajerk.getajobcards.FileHelper"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name="com.booisajerk.getajobcards.MoreDetailsActivity"
             android:theme="@style/AppTheme.FloatingTheme" />
 
         <activity
             android:name="com.booisajerk.getajobcards.AddCardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.booisajerk.getajobcards.CardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="com.booisajerk.getajobcards.EditCardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.booisajerk.getajobcards.DeleteCardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 
