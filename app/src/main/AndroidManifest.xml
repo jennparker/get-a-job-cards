@@ -29,10 +29,6 @@
         </activity>
 
         <activity
-            android:name="com.booisajerk.getajobcards.MoreDetailsActivity"
-            android:theme="@style/AppTheme.FloatingTheme" />
-
-        <activity
             android:name="com.booisajerk.getajobcards.AddCardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

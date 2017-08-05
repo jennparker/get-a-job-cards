@@ -1,10 +1,13 @@
 package com.booisajerk.getajobcards;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +18,7 @@ import android.widget.Toast;
  * Created by jenniferparker on 7/30/17.
  */
 
-public class CardActivity extends Activity {
+public class CardActivity extends AppCompatActivity {
 
     private CardReaderDbHelper cardHelper;
 
@@ -92,11 +95,17 @@ public class CardActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                //TODO add alert dialog here
+                AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
+                dialog.setMessage(moreValue);
 
-                Intent moreDetailsintent = new Intent(CardActivity.this, MoreDetailsActivity.class);
-                moreDetailsintent.putExtra("more_string", moreValue);
-                startActivity(moreDetailsintent);
+                dialog.setNegativeButton ("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
             }
         });
 
@@ -120,7 +129,6 @@ public class CardActivity extends Activity {
                     @Override
                     public void onClick(View view) {
 
-                        //TODO add edit activity intent
                         Intent editCardintent = new Intent(CardActivity.this, EditCardActivity.class);
                         editCardintent.putExtra("current_question", c.getQuestion());
                         editCardintent.putExtra("current_answer", c.getAnswer());

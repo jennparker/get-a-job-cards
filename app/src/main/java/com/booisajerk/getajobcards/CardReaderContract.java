@@ -12,8 +12,6 @@ public class CardReaderContract {
     private CardReaderContract() {
     }
 
-    //TODO changed table name from card to cards
-
     /* Inner class that defines the table contents
      * Implement BaseColumns so _ID field is included. This helps for working with CursorAdapter */
     public static class CardEntry implements BaseColumns {

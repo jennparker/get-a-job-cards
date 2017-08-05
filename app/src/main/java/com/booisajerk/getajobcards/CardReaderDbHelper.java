@@ -25,7 +25,6 @@ public class CardReaderDbHelper extends SQLiteOpenHelper {
 // you will actually use after this query.
     String[] projection = {
 
-            //TODO add id to contract, I think
             CardReaderContract.CardEntry.COLUMN_NAME_ID,
             CardReaderContract.CardEntry.COLUMN_NAME_QUESTION,
             CardReaderContract.CardEntry.COLUMN_NAME_ANSWER,
@@ -199,9 +198,9 @@ public class CardReaderDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void dropTable(){
+    public void dropTable() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String dropTable = "DROP TABLE " +CardReaderContract.CardEntry.TABLE_NAME;
+        String dropTable = "DROP TABLE " + CardReaderContract.CardEntry.TABLE_NAME;
 
         Log.d(LOG_TAG, "Table dropped");
 

@@ -56,7 +56,6 @@ public class AddCardActivity extends Activity {
                     //Make new card_activity
                     Card card = new Card(
 
-                            //TODO need to get the latest card # and increment one to add ID field
                             addQuestionText.getText().toString(),
                             addAnswerText.getText().toString(),
                             addMoreText.getText().toString(),

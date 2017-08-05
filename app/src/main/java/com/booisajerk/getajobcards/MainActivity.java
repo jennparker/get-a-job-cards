@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Parker" + MainActivity.class.getSimpleName();
 
     //TODO add app bar to card_activity screen
-    //TODO create a save question for later button
-    //TODO create a add a new question button
     //TODO create a back button
     //TODO switch to fragments
     //TODO handle onRotation
@@ -26,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO shuffle questions
     //TODO how to control new line break
     //TODO add hyperlinks
-    //TODO add ability to click off more view
-    //TODO add id column
+    //TODO long strings being cut off - fix
+    //TODO only show more button when there is more text
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "OnCreate called");
 
-
         Button categorySelectionButton = (Button) findViewById(R.id.categorySelectionButton);
         categorySelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //TODO display category checked text box
-
 
             }
         });
