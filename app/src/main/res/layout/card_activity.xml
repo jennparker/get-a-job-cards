@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.booisajerk.getajobcards.CardActivity"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="45dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.booisajerk.getajobcards.CardActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/card__options_fab"
+        android:id="@+id/fabDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:layout_gravity="bottom|end"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorLight"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:layout_above="@+id/fabEdit"
+        android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/card__delete_fab"
+        android:id="@+id/fabEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
-        android:visibility="invisible"/>
+        android:layout_gravity="bottom|end"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorLight"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_edit_black_24dp"
+        android:layout_above="@+id/fabAdd"
+        android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/card_edit_fab"
+        android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
-        android:visibility="invisible"/>
-    </LinearLayout>
+        android:layout_gravity="bottom|end"
+        android:visibility="invisible"
+        app:elevation="6dp"
+        app:backgroundTint="@color/colorLight"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_add_black_24dp"
+        android:layout_above="@+id/fabOptions"
+        android:layout_alignParentEnd="true" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabOptions"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom|end"
+        app:elevation="6dp"
+        app:backgroundTint="@color/colorAccent"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_build_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:id="@+id/questionNumberText"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:visibility="invisible"
-            android:text="3" />
-
-        <TextView
-            android:id="@+id/categoryText"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="@string/sampleCategoryText"
-            android:textColor="@color/textBackground" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/categoryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/sampleCategoryText"
+        android:textColor="@color/textBackground" />
 
     <TextView
         android:id="@+id/cardQuestionText"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoryText"
+        android:layout_margin="24dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/sampleText"
         android:textAlignment="center"
@@ -72,8 +83,9 @@
     <TextView
         android:id="@+id/cardAnswerText"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:layout_below="@id/cardQuestionText"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/sampleText"
         android:textAlignment="center"
@@ -84,9 +96,11 @@
         android:id="@+id/moreButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/advanceButton"
         android:layout_gravity="center_horizontal"
         android:layout_margin="24dp"
         android:text="@string/more_button_text"
+        android:layout_centerInParent="true"
         android:textColor="@color/textBackground"
         android:textSize="@dimen/card_more_text_size" />
 
@@ -94,13 +108,15 @@
         android:id="@+id/advanceButton"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/rounded_button"
         android:paddingLeft="@dimen/button_padding"
         android:paddingRight="@dimen/button_padding"
         android:text="@string/sampleButtonText" />
 
-</LinearLayout>
+</RelativeLayout>
 
 
 

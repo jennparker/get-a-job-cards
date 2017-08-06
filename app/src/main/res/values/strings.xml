@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">Get a Job Cards</string>
+    <string name="app_name">Get Job</string>
 
     <!--Settings-->
     <string name="action_settings">Settings</string>
     <string name="action_delete_card">Delete a card</string>
     <string name="action_edit_card">Edit a card</string>
     <string name="action_add_new_card">Add a new card</string>
-
 
     <!--Main Activity-->
 
@@ -36,9 +35,6 @@
     <string name="edit_answer_hint_text">Edit answer text here</string>
     <string name="edit_question_hint_text">Edit question text here</string>
     <string name="edit_category_hint_text">Edit category text here</string>
-
-    <!--Delete Card Activity-->
-
 
     <!--Shared-->
     <string name="question_title_text">Question</string>

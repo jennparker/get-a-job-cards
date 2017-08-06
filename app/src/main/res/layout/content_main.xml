@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:layout_margin="62dp"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="horizontal"
+    android:background="@drawable/xxhdpi_background"
+    android:alpha=".70"
+    android:gravity="bottom"
     tools:context="com.booisajerk.getajobcards.MainActivity"
     tools:showIn="@layout/activity_main">
 
@@ -15,8 +15,9 @@
         android:id="@+id/categorySelectionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/rounded_button"
         android:paddingLeft="@dimen/button_padding"
         android:paddingRight="@dimen/button_padding"
@@ -26,10 +27,11 @@
         android:id="@+id/allCardsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="56dp"
+        android:layout_marginEnd="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/rounded_button"
         android:paddingLeft="@dimen/button_padding"
         android:paddingRight="@dimen/button_padding"
         android:text="@string/want_all_button_text" />
-</LinearLayout>
+</RelativeLayout>
