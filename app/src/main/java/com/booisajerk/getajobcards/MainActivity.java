@@ -14,8 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Parker" + MainActivity.class.getSimpleName();
 
-    //TODO add app bar to card_activity screen
-    //TODO create a back button
     //TODO switch to fragments
     //TODO handle onRotation
     //TODO card_activity flip animation

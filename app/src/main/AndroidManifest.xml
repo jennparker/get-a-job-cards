@@ -24,25 +24,22 @@
 
         <activity
             android:name="com.booisajerk.getajobcards.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.AddCardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Add a Card"
+            android:parentActivityName=".CardActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.CardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:label="Get Smart"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.EditCardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name="com.booisajerk.getajobcards.DeleteCardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Edit a Card"
+            android:parentActivityName=".CardActivity"
+            android:theme="@style/AppTheme.ActionBar" />
     </application>
-
 
 </manifest>

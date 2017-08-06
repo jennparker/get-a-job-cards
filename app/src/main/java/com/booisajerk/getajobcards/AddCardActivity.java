@@ -1,11 +1,15 @@
 package com.booisajerk.getajobcards;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,7 +26,7 @@ import java.util.List;
  */
 
 
-public class AddCardActivity extends Activity {
+public class AddCardActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Parker " + AddCardActivity.class.getSimpleName();
 
@@ -31,6 +35,12 @@ public class AddCardActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override

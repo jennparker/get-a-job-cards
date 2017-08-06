@@ -3,7 +3,9 @@ package com.booisajerk.getajobcards;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,7 +16,7 @@ import android.widget.Toast;
  * Created by jenniferparker on 8/1/17.
  */
 
-public class EditCardActivity extends Activity{
+public class EditCardActivity extends AppCompatActivity{
 
     public static final String LOG_TAG = "Parker " + EditCardActivity.class.getSimpleName();
 
@@ -23,7 +25,12 @@ public class EditCardActivity extends Activity{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.edit_card);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
