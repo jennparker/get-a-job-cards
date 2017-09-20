@@ -12,10 +12,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "Parker" + MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = "Parker " + MainActivity.class.getSimpleName();
 
-    //TODO switch to fragments
-    //TODO handle onRotation
     //TODO card_activity flip animation
     //TODO use ViewPager for cards
     //TODO option to select by category
@@ -23,7 +21,14 @@ public class MainActivity extends AppCompatActivity {
     //TODO how to control new line break
     //TODO add hyperlinks
     //TODO long strings being cut off - fix
-    //TODO only show more button when there is more text
+    //TODO work in background thread
+    //TODO handle delete
+    //TODO handle edit
+    //TODO handle add
+    //TODO add questions to the db
+    //TODO add scrolling for long answers
+    //TODO questions resetting on rotation
+    //TODO use singleton design pattern for accessing db
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +44,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //TODO display category checked text box
-
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                Log.d(LOG_TAG, "Starting CategoryActivity activity");
+                startActivity(intent);
             }
         });
-
 
         Button allCardsButton = (Button) findViewById(R.id.allCardsButton);
         allCardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CardActivity.class);
+                intent.putExtra("origin", "all");
+                Log.d(LOG_TAG, "Starting Card activity.");
                 startActivity(intent);
             }
         });

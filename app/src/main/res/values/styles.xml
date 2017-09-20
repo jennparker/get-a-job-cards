@@ -38,6 +38,11 @@
         <item name="android:layout_marginTop">6dp</item>
     </style>
 
+    <style name="CategoryButtonStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
 </resources>
 
 

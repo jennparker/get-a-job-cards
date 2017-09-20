@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/androidCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/android_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/generalCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/androidCategoryButton"
+        android:text="@string/general_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/javaCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/generalCategoryButton"
+        android:text="@string/java_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/javaScriptCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/javaCategoryButton"
+        android:text="@string/javaScript_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/androidCategoryButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="87dp"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+</RelativeLayout>

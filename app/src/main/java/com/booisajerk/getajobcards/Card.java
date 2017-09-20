@@ -1,37 +1,33 @@
 package com.booisajerk.getajobcards;
 
-import android.util.Log;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by jenniferparker on 7/30/17.
  */
 
+@Entity(tableName = "card")
 public class Card {
 
-    public static final String LOG_TAG = "Parker" + Card.class.getSimpleName();
+    public static final String LOG_TAG = "Parker " + Card.class.getSimpleName();
+
+    @PrimaryKey(autoGenerate = true)
     private int id;
-    private String question = null;
-    private String answer = null;
-    private String category = null;
-    private String more = null;
 
-    public Card() {
-    }
+    @ColumnInfo(name = "question")
+    private String question;
 
-    public Card(String question, String answer, String more, String category) {
-        this.question = question;
-        this.answer = answer;
-        this.more = more;
-        this.category = category;
-    }
+    @ColumnInfo(name = "answer")
+    private String answer;
 
-    public Card(int id, String question, String answer, String category, String more) {
-        this.id = id;
-        this.question = question;
-        this.answer = answer;
-        this.more = more;
-        this.category = category;
-    }
+    @ColumnInfo(name = "category")
+    private String category;
+
+    @ColumnInfo(name = "more")
+    private String more;
+
 
     public int getId() {
         return id;

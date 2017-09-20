@@ -76,7 +76,7 @@
         android:layout_below="@id/categoryText"
         android:layout_margin="24dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="@string/sampleText"
+        android:text="@string/sampleQuestionText"
         android:textAlignment="center"
         android:textSize="@dimen/card_text_size" />
 
@@ -87,7 +87,7 @@
         android:layout_margin="24dp"
         android:layout_below="@id/cardQuestionText"
         android:gravity="center_vertical|center_horizontal"
-        android:text="@string/sampleText"
+        android:text="@string/sampleAnswerText"
         android:textAlignment="center"
         android:textSize="@dimen/card_text_size"
         android:visibility="invisible" />

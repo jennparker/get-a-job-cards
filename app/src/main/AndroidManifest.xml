@@ -40,6 +40,11 @@
             android:label="Edit a Card"
             android:parentActivityName=".CardActivity"
             android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name="com.booisajerk.getajobcards.CategoryActivity"
+            android:label="Categories"
+            android:parentActivityName=".CardActivity"
+            android:theme="@style/AppTheme.ActionBar" />
     </application>
 
 </manifest>

@@ -16,15 +16,27 @@ import android.widget.Toast;
  * Created by jenniferparker on 8/1/17.
  */
 
-public class EditCardActivity extends AppCompatActivity{
+public class EditCardActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Parker " + EditCardActivity.class.getSimpleName();
+
+    EditText editQuestionText;
+    EditText editAnswerText;
+    EditText editMoreText;
+    EditText editCategoryText;
+    Button submitButton;
+
+    AppDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(LOG_TAG, "Edit card called");
 
         setContentView(R.layout.edit_card);
+
+        Log.d(LOG_TAG, "Getting db instance");
+        db = AppDatabase.getInMemoryDatabase(getApplicationContext());
     }
 
     @Override
@@ -37,13 +49,11 @@ public class EditCardActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
 
-        final CardReaderDbHelper cardHelper = new CardReaderDbHelper(this);
-
-        final EditText editQuestionText = (EditText) findViewById(R.id.question_text_edit_card);
-        final EditText editAnswerText = (EditText) findViewById(R.id.answer_text_edit_card);
-        final EditText editMoreText = (EditText) findViewById(R.id.more_text_edit_card);
-        final EditText editCategoryText = (EditText) findViewById(R.id.category_text_edit_card);
-        Button submitButton = (Button) findViewById(R.id.submit_button);
+        editQuestionText = (EditText) findViewById(R.id.question_text_edit_card);
+        editAnswerText = (EditText) findViewById(R.id.answer_text_edit_card);
+        editMoreText = (EditText) findViewById(R.id.more_text_edit_card);
+        editCategoryText = (EditText) findViewById(R.id.category_text_edit_card);
+        submitButton = (Button) findViewById(R.id.submit_button);
 
 
         editQuestionText.setText(getIntent().getExtras().getString("current_question"));
@@ -53,32 +63,33 @@ public class EditCardActivity extends AppCompatActivity{
         final int currentId = getIntent().getExtras().getInt("current_id");
 
         submitButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-            Card card = new Card(
-                    editQuestionText.getText().toString(), editAnswerText.getText().toString(),
-                    editMoreText.getText().toString(), editCategoryText.getText().toString());
+               Log.d(LOG_TAG, "Submitting edited text");
 
-            Log.d(LOG_TAG, "New Question: " + editQuestionText.getText().toString() +
-            " New Answer: " + editAnswerText.getText().toString()
-                    + " New More: " + editMoreText.getText().toString()
-            + " New Category: " + editCategoryText.getText().toString()
-                 +   " New Id: " + currentId);
+                Card card = new Card();
+                card.setQuestion(editQuestionText.getText().toString());
+                card.setAnswer(editAnswerText.getText().toString());
+                card.setCategory(editCategoryText.getText().toString());
+                card.setMore(editMoreText.getText().toString());
 
-                    cardHelper.updateCard(card);
+                db.cardModel().insertCard(card);
 
-            Toast.makeText(EditCardActivity.this, "Card edited", Toast.LENGTH_LONG).show();
+                //TODO need this to refresh
 
-            editQuestionText.setText(null);
-            editAnswerText.setText(null);
-            editCategoryText.setText(null);
-            editMoreText.setText(null);
+                Toast.makeText(EditCardActivity.this, "Card edited", Toast.LENGTH_LONG).show();
 
-            //Hide soft keyboard
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);        }
-    });
+                editQuestionText.setText(null);
+                editAnswerText.setText(null);
+                editCategoryText.setText(null);
+                editMoreText.setText(null);
+
+                //Hide soft keyboard
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        });
     }
 
 }
