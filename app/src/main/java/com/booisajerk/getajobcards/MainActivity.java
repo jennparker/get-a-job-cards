@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -71,20 +73,33 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         if (id == R.id.action_add_card) {
+            Log.d(LOG_TAG, "Add card selected.");
             Intent addCardIntent = new Intent(MainActivity.this, AddCardActivity.class);
             startActivity(addCardIntent);
+        }
 
+        if (id == R.id.action_add_study_cards) {
+            Log.d(LOG_TAG, "Add study cards called.");
+            Intent loadCardIntent = new Intent(this, LoadCards.class);
+            startActivity(loadCardIntent);
+        }
+
+        if (id == R.id.action_show_questions) {
+            Log.d("Reading: ", "Reading all cards..");
+
+            AppDatabase db = AppDatabase.getInMemoryDatabase(getApplicationContext());
+            List<Card> cards = db.cardModel().loadAllCards();
+
+            Toast.makeText(this, "Check logs for read our of all db rows", Toast.LENGTH_LONG).show();
+
+            for (Card c : cards) {
+                String log = "Id: " + c.getId() + " ,Question: " + c.getQuestion() + " ,Answer: " +
+                        c.getAnswer() + " ,Category: " + c.getCategory() + " ,More: " + c.getMore();
+                Log.d(LOG_TAG, "Result from db: " + log);
+            }
         }
 
         return super.onOptionsItemSelected(item);

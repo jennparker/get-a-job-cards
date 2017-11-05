@@ -77,27 +77,21 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         if (getIntent().getExtras() != null) {
             category = getIntent().getExtras().getString("origin");
 
-            if (category.equals("all")) {
-                Log.d(LOG_TAG, "Calling Load all cards.");
-                cards = db.cardModel().loadAllCards();
-                cardCount = db.cardModel().countAllCards();
-                Log.d(LOG_TAG, "Card count is: " + cardCount);
-                displayQuestion();
-            } else {
-                if (category.equals("Java")) {
-                    cards = db.cardModel().getCategoryCards("Java");
-                } else if (category.equals("JavaScript")) {
-                    cards = db.cardModel().getCategoryCards("JavaScript");
-                } else if (category.equals("Android")) {
-                    cards = db.cardModel().getCategoryCards("Android");
-                } else if (category.equals("General")) {
-                    cards = db.cardModel().getCategoryCards("General");
+            if (category != null) {
+
+                if (category.equals("all")) {
+                    Log.d(LOG_TAG, "Calling Load all cards.");
+                    cards = db.cardModel().loadAllCards();
+                    cardCount = db.cardModel().countAllCards();
+                    Log.d(LOG_TAG, "Card count is: " + cardCount);
+                    displayQuestion();
+                } else {
+                    cards = db.cardModel().getCategoryCards(category);
+                    cardCount = db.cardModel().countCategoryCards(category);
+                    Log.d(LOG_TAG, "Calling category cards for: " + category);
+                    Log.d(LOG_TAG, "Category card count is: " + cardCount);
+                    displayQuestion();
                 }
-                cards = db.cardModel().getCategoryCards(category);
-                cardCount = db.cardModel().countCategoryCards(category);
-                Log.d(LOG_TAG, "Calling category cards for: " + category);
-                Log.d(LOG_TAG, "Category card count is: " + cardCount);
-                displayQuestion();
             }
         } else {
             Log.d(LOG_TAG, "Intent is null. Fix this.");
@@ -213,7 +207,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(LOG_TAG, "Get current card called.");
         Log.d(LOG_TAG, "Current cardNum =  " + cardNum);
 
-          if (cardNum < cardCount) {
+        if (cardNum < cardCount) {
             card = cards.get(cardNum);
             Log.d(LOG_TAG, "Card's Category is: " + card.getCategory() + ". Selected category is " + category);
 

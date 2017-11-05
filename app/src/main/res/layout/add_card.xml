@@ -66,26 +66,4 @@
         android:paddingRight="@dimen/button_padding"
         android:text="@string/submit_button_text" />
 
-    <Button
-        android:id="@+id/add_questions_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button"
-        android:paddingLeft="@dimen/button_padding"
-        android:paddingRight="@dimen/button_padding"
-        android:text="Add questions to db" />
-
-    <Button
-        android:id="@+id/show_questions_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button"
-        android:paddingLeft="@dimen/button_padding"
-        android:paddingRight="@dimen/button_padding"
-        android:text="Show db contents in logcat" />
-
 </LinearLayout>

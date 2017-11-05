@@ -4,13 +4,15 @@
     tools:context="com.booisajerk.getajobcards.MainActivity">
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_add_card"
         android:title="@string/action_add_new_card" />
+
+    <item
+        android:id="@+id/action_add_study_cards"
+        android:title="@string/action_add_study_cards"/>
+
+    <item
+        android:id="@+id/action_show_questions"
+        android:title="@string/action_show_db_cards_in_log"/>
 
 </menu>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="12dp">
 
     <Button
         android:id="@+id/androidCategoryButton"
@@ -13,18 +14,58 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
-        android:id="@+id/generalCategoryButton"
+        android:id="@+id/cssCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/androidCategoryButton"
+        android:text="@string/css_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/databaseCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cssCategoryButton"
+        android:text="@string/database_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/effectiveJavaCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/databaseCategoryButton"
+        android:text="@string/effective_java_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/generalCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/effectiveJavaCategoryButton"
         android:text="@string/general_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/htmlCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/generalCategoryButton"
+        android:text="@string/html_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
+        android:id="@+id/interviewCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/htmlCategoryButton"
+        android:text="@string/interview_category"
         style="@style/CategoryButtonStyle"/>
 
     <Button
         android:id="@+id/javaCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/generalCategoryButton"
+        android:layout_below="@+id/interviewCategoryButton"
         android:text="@string/java_category"
         style="@style/CategoryButtonStyle"/>
 
@@ -36,13 +77,12 @@
         android:text="@string/javaScript_category"
         style="@style/CategoryButtonStyle"/>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <Button
+        android:id="@+id/sqlCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/androidCategoryButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="87dp"
-        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+        android:layout_below="@+id/javaScriptCategoryButton"
+        android:text="@string/sql_category"
+        style="@style/CategoryButtonStyle"/>
 
 </RelativeLayout>

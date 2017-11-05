@@ -45,6 +45,7 @@
             android:label="Categories"
             android:parentActivityName=".CardActivity"
             android:theme="@style/AppTheme.ActionBar" />
+        <activity android:name=".LoadCards" />
     </application>
 
 </manifest>
