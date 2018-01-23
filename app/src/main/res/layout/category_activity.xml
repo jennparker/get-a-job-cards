@@ -46,6 +46,14 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
+        android:id="@+id/gitCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/generalCategoryButton"
+        android:text="@string/git_category"
+        style="@style/CategoryButtonStyle"/>
+
+    <Button
         android:id="@+id/htmlCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -48,6 +48,7 @@
     <string name="database_category">Databases</string>
     <string name="effective_java_category">Effective Java</string>
     <string name="general_category">General</string>
+    <string name="git_category">Git</string>
     <string name="html_category">HTML</string>
     <string name="interview_category">Interview Problems</string>
     <string name="java_category">Java</string>
