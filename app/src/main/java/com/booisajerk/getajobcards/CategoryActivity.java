@@ -18,7 +18,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Parker " + CategoryActivity.class.getSimpleName();
 
-    Button androidButton, cssButton, databaseButton, effectiveJavaButton, generalButton, htmlButton,
+    Button androidButton, cssButton, databaseButton, effectiveJavaButton, generalButton, gitButton, htmlButton,
             interviewButton, javaButton, javaScriptButton, sqlButton;
 
     String categoryName;
@@ -40,6 +40,7 @@ public class CategoryActivity extends AppCompatActivity {
         databaseButton = (Button) findViewById(R.id.databaseCategoryButton);
         effectiveJavaButton = (Button) findViewById(R.id.effectiveJavaCategoryButton);
         generalButton = (Button) findViewById(R.id.generalCategoryButton);
+        gitButton = (Button) findViewById(R.id.gitCategoryButton);
         htmlButton = (Button) findViewById(R.id.htmlCategoryButton);
         interviewButton = (Button) findViewById(R.id.interviewCategoryButton);
         javaButton = (Button) findViewById(R.id.javaCategoryButton);
@@ -100,6 +101,17 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 categoryName = getString(R.string.general_category);
+                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
+                intent.putExtra("origin", categoryName);
+                Log.d(LOG_TAG, categoryName + " category selected.");
+                startActivity(intent);
+            }
+        });
+
+        gitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryName = getString(R.string.git_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
                 intent.putExtra("origin", categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
