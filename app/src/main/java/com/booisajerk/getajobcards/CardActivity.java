@@ -46,10 +46,21 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     String category;
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("SavedCategoryValue", cardCategoryText.getText().toString());
+        outState.putString("SavedQuestionValue", cardQuestionText.getText().toString());
+        outState.putString("SavedAnswerValue", cardAnswerText.getText().toString());
+        // outState.putString("SavedMoreValue", cardMoreText.getText().toString());
+
+        ///TODO save card # too?
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.card_activity);
+
         cardNum = 0;
         Log.d(LOG_TAG, "Setting cardNum to: " + cardNum);
 
@@ -73,6 +84,17 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         addCardFab.setOnClickListener(this);
         editCardFab.setOnClickListener(this);
         deleteCardFab.setOnClickListener(this);
+
+        if (savedInstanceState != null) {
+            cardCategoryText.setText(savedInstanceState.getString("SavedCategoryValue"));
+            cardQuestionText.setText(savedInstanceState.getString("SavedQuestionValue"));
+            cardAnswerText.setText(savedInstanceState.getString("SavedAnswerValue"));
+            //  moreButton.setText(savedInstanceState.getString("SavedMoreValue"));
+            Log.d(LOG_TAG, "SavedInstanceState is not null. CareQuestionText = "
+                    + cardQuestionText.getText().toString());
+        } else {
+            Log.d(LOG_TAG, "savedInstanceState is null.");
+        }
 
         if (getIntent().getExtras() != null) {
             category = getIntent().getExtras().getString("origin");
@@ -131,8 +153,28 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             case R.id.fabDelete:
-                Toast.makeText(CardActivity.this, "Show delete card dialog", Toast.LENGTH_LONG).show();
-                Log.d(LOG_TAG, "Delete Fab pressed");
+
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+                dialog.setPositiveButton(R.string.card_delete_confirmation, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(LOG_TAG, "Deleting this card FOREVER!");
+                        db.cardModel().delete(card);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Hope you didn't want that - it's gone!", Toast.LENGTH_LONG);
+                    }
+                });
+
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
         }
     }
 
@@ -163,21 +205,22 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        //TODO Make the button open the link
         moreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
-                dialog.setMessage(moreValue);
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
+                dialog.setPositiveButton(R.string.open_link_text, null)
+                        .setMessage(moreValue)
+                        .create();
 
                 dialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                     }
                 });
-
                 dialog.show();
-
             }
         });
 

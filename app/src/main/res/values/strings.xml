@@ -56,5 +56,7 @@
 
     <string name="action_add_study_cards">Add study cards</string>
     <string name="action_show_db_cards_in_log">Show db cards in Log</string>
+    <string name="open_link_text">Open link</string>
+    <string name="card_delete_confirmation">Delete the card?</string>
 
 </resources>

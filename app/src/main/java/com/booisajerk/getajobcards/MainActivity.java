@@ -19,17 +19,17 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO card_activity flip animation
     //TODO use ViewPager for cards
-    //TODO option to select by category
     //TODO shuffle questions
     //TODO how to control new line break
     //TODO add hyperlinks
-    //TODO long strings being cut off - fix
+
     //TODO work in background thread
     //TODO handle delete
     //TODO handle edit
     //TODO handle add
     //TODO add questions to the db
     //TODO add scrolling for long answers
+     //TODO long strings being cut off - fix
     //TODO questions resetting on rotation
     //TODO use singleton design pattern for accessing db
 
