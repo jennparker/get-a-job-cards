@@ -23,8 +23,6 @@ public class CategoryActivity extends AppCompatActivity {
 
     String categoryName;
 
-    AppDatabase db;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +30,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         setContentView(R.layout.category_activity);
 
-        Log.d(LOG_TAG, "Initializing db");
-        db = AppDatabase.getInMemoryDatabase(getApplicationContext());
 
         androidButton = (Button) findViewById(R.id.androidCategoryButton);
         cssButton = (Button) findViewById(R.id.cssCategoryButton);

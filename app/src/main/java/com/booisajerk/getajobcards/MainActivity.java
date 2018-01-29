@@ -2,6 +2,7 @@ package com.booisajerk.getajobcards;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,7 +12,17 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.List;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO handle add
     //TODO add questions to the db
     //TODO add scrolling for long answers
-     //TODO long strings being cut off - fix
+    //TODO long strings being cut off - fix
     //TODO questions resetting on rotation
     //TODO use singleton design pattern for accessing db
 
@@ -73,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(LOG_TAG, "Initialize instance of Firebase");
+        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
+
         int id = item.getItemId();
 
         if (id == R.id.action_add_card) {
@@ -81,28 +95,52 @@ public class MainActivity extends AppCompatActivity {
             startActivity(addCardIntent);
         }
 
-        if (id == R.id.action_add_study_cards) {
-            Log.d(LOG_TAG, "Add study cards called.");
-            Intent loadCardIntent = new Intent(this, LoadCards.class);
-            startActivity(loadCardIntent);
+        if (id == R.id.action_add_card_to_firebase) {
+
+            // Create a test card
+            Map<String, Object> card = new HashMap<>();
+            card.put("question", "test question");
+            card.put("answer", "test answer");
+            card.put("category", "Git");
+            card.put("more", "test more");
+
+            firebaseFirestoreDb.collection("cards")
+                    .add(card)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(LOG_TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(LOG_TAG, "Error adding document", e);
+                        }
+                    });
+
+            Toast.makeText(this, "Card added to Firebase", Toast.LENGTH_LONG).show();
         }
 
-        if (id == R.id.action_show_questions) {
-            Log.d("Reading: ", "Reading all cards..");
+        if (id == R.id.action_read_card_from_firebase) {
 
-            AppDatabase db = AppDatabase.getInMemoryDatabase(getApplicationContext());
-            List<Card> cards = db.cardModel().loadAllCards();
-
-            Toast.makeText(this, "Check logs for read our of all db rows", Toast.LENGTH_LONG).show();
-
-            for (Card c : cards) {
-                String log = "Id: " + c.getId() + " ,Question: " + c.getQuestion() + " ,Answer: " +
-                        c.getAnswer() + " ,Category: " + c.getCategory() + " ,More: " + c.getMore();
-                Log.d(LOG_TAG, "Result from db: " + log);
-            }
+            firebaseFirestoreDb.collection("cards")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot document : task.getResult()) {
+                                    Log.d(LOG_TAG, document.getId() + " => " + document.getData());
+                                }
+                            } else {
+                                Log.w(LOG_TAG, "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
+            Toast.makeText(this, "Check Logs to see retrieved card", Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 }

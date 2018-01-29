@@ -3,6 +3,7 @@ package com.booisajerk.getajobcards;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +15,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.util.List;
 
@@ -38,7 +47,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
     Card card;
 
-    AppDatabase db;
     List<Card> cards;
     private Boolean isFabOpen = false;
     private FloatingActionButton optionsFab, editCardFab, deleteCardFab, addCardFab;
@@ -51,7 +59,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         outState.putString("SavedCategoryValue", cardCategoryText.getText().toString());
         outState.putString("SavedQuestionValue", cardQuestionText.getText().toString());
         outState.putString("SavedAnswerValue", cardAnswerText.getText().toString());
-        // outState.putString("SavedMoreValue", cardMoreText.getText().toString());
+        //outState.putString("SavedMoreValue", cardMoreText.getText().toString());
 
         ///TODO save card # too?
     }
@@ -60,12 +68,12 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.card_activity);
+        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
 
         cardNum = 0;
         Log.d(LOG_TAG, "Setting cardNum to: " + cardNum);
 
         Log.d(LOG_TAG, "Calling getInMemeoryDatabase");
-        db = AppDatabase.getInMemoryDatabase(getApplicationContext());
 
         cardCategoryText = (TextView) findViewById(R.id.categoryText);
         cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
@@ -101,15 +109,36 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
             if (category != null) {
 
+//TODO how to get cards by category from firebase
                 if (category.equals("all")) {
                     Log.d(LOG_TAG, "Calling Load all cards.");
-                    cards = db.cardModel().loadAllCards();
-                    cardCount = db.cardModel().countAllCards();
+
+                    firebaseFirestoreDb.collection("cards")
+                            //.whereEqualTo("capital", true)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (DocumentSnapshot document : task.getResult()) {
+                                            Log.d(LOG_TAG, document.getId() + " => " + document.getData());
+                                        }
+                                    } else {
+                                        Log.d(LOG_TAG, "Error getting documents: ", task.getException());
+                                    }
+                                }
+                            });
+
+
+
+                    //  cards = db.cardModel().loadAllCards();
+                    //  cardCount = db.cardModel().countAllCards();
                     Log.d(LOG_TAG, "Card count is: " + cardCount);
                     displayQuestion();
                 } else {
-                    cards = db.cardModel().getCategoryCards(category);
-                    cardCount = db.cardModel().countCategoryCards(category);
+                    //TODO get cards for intent category
+                    // cards = db.cardModel().getCategoryCards(category);
+                    //  cardCount = db.cardModel().countCategoryCards(category);
                     Log.d(LOG_TAG, "Calling category cards for: " + category);
                     Log.d(LOG_TAG, "Category card count is: " + cardCount);
                     displayQuestion();
@@ -154,13 +183,14 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.fabDelete:
 
+                //TODO delete card in Firebase
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
                 dialog.setPositiveButton(R.string.card_delete_confirmation, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(LOG_TAG, "Deleting this card FOREVER!");
-                        db.cardModel().delete(card);
+                        //       db.cardModel().delete(card);
 
                         Toast.makeText(getApplicationContext(),
                                 "Hope you didn't want that - it's gone!", Toast.LENGTH_LONG);

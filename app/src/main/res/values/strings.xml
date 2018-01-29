@@ -55,8 +55,8 @@
     <string name="javaScript_category">JavaScript</string>
     <string name="sql_category">SQL</string>
 
-    <string name="action_add_study_cards">Add study cards</string>
-    <string name="action_show_db_cards_in_log">Show db cards in Log</string>
+    <string name="action_add_card_to_firebase">Add dummy card in Firebase</string>
+    <string name="action_read_card_from_firebase">Read card from Firebase</string>
     <string name="open_link_text">Open link</string>
     <string name="card_delete_confirmation">Delete the card?</string>
 

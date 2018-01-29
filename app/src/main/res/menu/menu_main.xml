@@ -8,11 +8,11 @@
         android:title="@string/action_add_new_card" />
 
     <item
-        android:id="@+id/action_add_study_cards"
-        android:title="@string/action_add_study_cards"/>
+        android:id="@+id/action_add_card_to_firebase"
+        android:title="@string/action_add_card_to_firebase"/>
 
     <item
-        android:id="@+id/action_show_questions"
-        android:title="@string/action_show_db_cards_in_log"/>
-
+        android:id="@+id/action_read_card_from_firebase"
+        android:title="@string/action_read_card_from_firebase"/>
 </menu>
+

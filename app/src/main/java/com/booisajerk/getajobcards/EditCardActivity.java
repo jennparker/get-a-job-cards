@@ -14,6 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jenniferparker on 8/1/17.
  */
@@ -28,8 +34,6 @@ public class EditCardActivity extends AppCompatActivity {
     EditText editCategoryText;
     Button submitButton;
     private Card card;
-
-    AppDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,13 +50,7 @@ public class EditCardActivity extends AppCompatActivity {
         editCategoryText = findViewById(R.id.category_text_edit_card);
         submitButton = findViewById(R.id.submit_button);
 
-
-
         Log.d(LOG_TAG, "Edit card called");
-
-
-        Log.d(LOG_TAG, "Getting db instance");
-        db = AppDatabase.getInMemoryDatabase(getApplicationContext());
     }
 
     @Override
@@ -64,7 +62,6 @@ public class EditCardActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
 
         //Get the intent extras from the Card class
         editQuestionText.setText(getIntent().getExtras().getString("current_question"));
@@ -78,15 +75,30 @@ public class EditCardActivity extends AppCompatActivity {
 
                 Log.d(LOG_TAG, "Submitting edited text");
 
+                final FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
 
-                //Insert the values into the card model
-                card.setQuestion(editQuestionText.getText().toString());
-                card.setAnswer(editAnswerText.getText().toString());
-                card.setCategory(editCategoryText.getText().toString());
-                card.setMore(editMoreText.getText().toString());
+                CollectionReference cards = firebaseFirestoreDb.collection("cards");
 
-                Log.d(LOG_TAG, "Inserting values into cardModel");
-                db.cardModel().insertCard(card);
+                //TODO edit card in Firebase - probably need to add a search for the question in Firebase here...
+
+                Map<String, Object> card = new HashMap<>();
+                card.put("question", editQuestionText.getText().toString());
+                card.put("answer", editAnswerText.getText().toString());
+                card.put("category", editCategoryText.getText().toString());
+                card.put("more", editMoreText.getText().toString());
+                //TODO How to set the id to the highest card # +1
+                cards.document("test2").set(card);
+
+
+
+//                //Insert the values into the card model
+//                card.setQuestion(editQuestionText.getText().toString());
+//                card.setAnswer(editAnswerText.getText().toString());
+//                card.setCategory(editCategoryText.getText().toString());
+//                card.setMore(editMoreText.getText().toString());
+
+            //    Log.d(LOG_TAG, "Inserting values into cardModel");
+                // db.cardModel().insertCard(card);
 
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(getApplicationContext());
                 dialog.setPositiveButton("Great!", new DialogInterface.OnClickListener() {
