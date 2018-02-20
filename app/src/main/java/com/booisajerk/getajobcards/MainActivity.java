@@ -26,7 +26,10 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "Parker " + MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = Constants.LOG_TAG_NAME + MainActivity.class.getSimpleName();
+
+    private Toolbar toolbar;
+    private Button categorySelectionButton, allCardsButton;
 
     //TODO card_activity flip animation
     //TODO use ViewPager for cards
@@ -48,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Log.d(LOG_TAG, "OnCreate called");
 
-        Button categorySelectionButton = (Button) findViewById(R.id.categorySelectionButton);
+        categorySelectionButton = (Button) findViewById(R.id.categorySelectionButton);
         categorySelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button allCardsButton = (Button) findViewById(R.id.allCardsButton);
+        allCardsButton = (Button) findViewById(R.id.allCardsButton);
         allCardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

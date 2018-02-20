@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = SplashActivity.class.getSimpleName();
+    private static final String LOG_TAG = Constants.LOG_TAG_NAME + SplashActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

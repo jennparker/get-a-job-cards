@@ -8,20 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.List;
-
 /**
  * Created by jenniferparker on 9/20/17.
  */
 
 public class CategoryActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "Parker " + CategoryActivity.class.getSimpleName();
+    private static final String LOG_TAG = Constants.LOG_TAG_NAME + CategoryActivity.class.getSimpleName();
 
-    Button androidButton, cssButton, databaseButton, effectiveJavaButton, generalButton, gitButton, htmlButton,
+    private Button androidButton, cssButton, databaseButton, effectiveJavaButton, generalButton, gitButton, htmlButton,
             interviewButton, javaButton, javaScriptButton, sqlButton;
 
-    String categoryName;
+    private String categoryName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,12 +47,14 @@ public class CategoryActivity extends AppCompatActivity {
         super.onStart();
         Log.d(LOG_TAG, "onStart called");
 
+        //Listening for the various Category click events
+
         androidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 categoryName = getString(R.string.android_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -65,7 +65,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.css_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -76,7 +76,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.database_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -87,7 +87,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.effective_java_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -98,7 +98,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.general_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -109,7 +109,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.git_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -120,7 +120,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.html_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -131,7 +131,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.interview_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -142,7 +142,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.java_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -153,7 +153,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.javaScript_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }
@@ -164,7 +164,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 categoryName = getString(R.string.sql_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra("origin", categoryName);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
                 startActivity(intent);
             }

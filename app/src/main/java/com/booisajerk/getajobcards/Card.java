@@ -1,5 +1,7 @@
 package com.booisajerk.getajobcards;
 
+import android.util.Log;
+
 public class Card {
 
     private int id;
@@ -8,18 +10,16 @@ public class Card {
     private String category;
     private String more;
 
-    public static final String LOG_TAG = "Parker " + Card.class.getSimpleName();
+    public static final String LOG_TAG = Constants.LOG_TAG_NAME + Card.class.getSimpleName();
 
     public Card() {
-
     }
 
-    public Card(String question, String answer, String category, String more, int id) {
+    public Card(String question, String answer, String category, String more) {
         setQuestion(question);
         setAnswer(answer);
         setCategory(category);
         setMore(more);
-        setId(id);
     }
 
     public void setId(int id) {
@@ -44,22 +44,27 @@ public class Card {
 
 
     public int getId() {
+        Log.d(LOG_TAG, "Getting ID");
         return id;
     }
 
     public String getQuestion() {
+        Log.d(LOG_TAG, "Getting question");
         return question;
     }
 
     public String getAnswer() {
+        Log.d(LOG_TAG, "Getting Answer");
         return answer;
     }
 
     public String getCategory() {
+        Log.d(LOG_TAG, "Getting Category");
         return category;
     }
 
     public String getMore() {
+        Log.d(LOG_TAG, "Getting More");
         return more;
     }
 }
