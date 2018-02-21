@@ -38,14 +38,12 @@ public class MainActivity extends AppCompatActivity {
     //TODO add hyperlinks
 
     //TODO work in background thread
-    //TODO handle delete
-    //TODO handle edit
-    //TODO handle add
-    //TODO add questions to the db
-    //TODO add scrolling for long answers
-    //TODO long strings being cut off - fix
     //TODO questions resetting on rotation
     //TODO use singleton design pattern for accessing db
+
+    //TODO how to autoadd ID for add card
+    //TODO add search term to edit card method
+    //TODO add search term to delete card method
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CardActivity.class);
-                intent.putExtra("origin", "all");
+                intent.putExtra(Constants.CATEGORY_STATE, R.string.all_categories);
                 Log.d(LOG_TAG, "Starting Card activity.");
                 startActivity(intent);
             }
@@ -102,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
 
             // Create a test card
             Map<String, Object> card = new HashMap<>();
-            card.put("question", "test question");
-            card.put("answer", "test answer");
-            card.put("category", "Git");
-            card.put("more", "test more");
+            card.put(Constants.CARD_QUESTION, "test question");
+            card.put(Constants.CARD_ANSWER, "test answer");
+            card.put(Constants.CARD_CATEGORY, "Git");
+            card.put(Constants.CARD_MORE, "test more");
 
-            firebaseFirestoreDb.collection("cards")
+            firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
                     .add(card)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
@@ -127,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_read_card_from_firebase) {
 
-            firebaseFirestoreDb.collection("cards")
+            firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override

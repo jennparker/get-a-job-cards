@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,6 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import static com.booisajerk.getajobcards.Constants.CATEGORY_STATE;
+//TODO when to use static import for constants
 
 /**
  * Created by jenniferparker on 7/30/17.
@@ -55,7 +59,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         outState.putString(Constants.INSTANCE_STATE_CATEGORY_KEY, cardCategoryText.getText().toString());
         outState.putString(Constants.INSTANCE_STATE_QUESTION_KEY, cardQuestionText.getText().toString());
         outState.putString(Constants.INSTANCE_STATE_ANSWER_KEY, cardAnswerText.getText().toString());
-       // outState.putString(Constants.INSTANCE_STATE_MORE_KEY, cardMoreText.getText().toString());
+        // outState.putString(Constants.INSTANCE_STATE_MORE_KEY, cardMoreText.getText().toString());
     }
 
     @Override
@@ -74,10 +78,12 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
         cardNum = 1;
         Log.d(LOG_TAG, "Setting cardNum to: " + cardNum);
-
-        cardCategoryText = (TextView) findViewById(R.id.categoryText);
-        cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
-        cardAnswerText = (TextView) findViewById(R.id.cardAnswerText);
+//
+//        cardCategoryText = (TextView) findViewById(R.id.categoryText);
+//        cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
+//        cardQuestionText.setMovementMethod(new ScrollingMovementMethod());
+//        cardAnswerText = (TextView) findViewById(R.id.cardAnswerText);
+//        cardAnswerText.setMovementMethod(new ScrollingMovementMethod());
         advanceButton = (Button) findViewById(R.id.advanceButton);
         moreButton = (TextView) findViewById(R.id.moreButton);
         optionsFab = (FloatingActionButton) findViewById(R.id.fabOptions);
@@ -105,7 +111,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (getIntent().getExtras() != null) {
-            category = getIntent().getExtras().getString(Constants.CATEGORY_STATE);
+            category = getIntent().getExtras().getString(CATEGORY_STATE);
             Log.d(LOG_TAG, "Getting values from Category intent");
 
             if (!cardsPopulated) {
@@ -126,14 +132,15 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
                                                 Log.d(LOG_TAG, "Card question is: " + card.getQuestion());
 
-                                                //  for (int i = 0; i < cardCount; ++i) {
                                                 cardList.add(card);
-//
-//                                                    Log.d(LOG_TAG, "i = " + i + " and list size is "
-//                                                            + cardList.size() + "card count = " + cardCount);
-                                                //  }
                                             }
                                             cardsPopulated = true;
+
+                                            cardCategoryText = (TextView) findViewById(R.id.categoryText);
+                                            cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
+                                            cardQuestionText.setMovementMethod(new ScrollingMovementMethod());
+                                            cardAnswerText = (TextView) findViewById(R.id.cardAnswerText);
+                                            cardAnswerText.setMovementMethod(new ScrollingMovementMethod());
 
                                         } else {
                                             Log.d(LOG_TAG, "Error getting documents: ", task.getException());
@@ -145,7 +152,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                         //TODO get cards for intent category
                         Log.d(LOG_TAG, "Calling category cards for: " + category);
                         firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
-                                .whereEqualTo("category", category)
+                                .whereEqualTo(Constants.CARD_CATEGORY, category)
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
@@ -161,12 +168,14 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
                                                 cardList.add(card);
                                                 cardsPopulated = true;
-//                                                for (int i = 0; i < cardCount; ++i) {
-//
-//                                                    Log.d(LOG_TAG, "i = " + i + " and list size is "
-//                                                            + cardList.size() + "card count = " + cardCount);
-//
-//                                                }
+
+
+                                                cardCategoryText = (TextView) findViewById(R.id.categoryText);
+                                                cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
+                                                cardQuestionText.setMovementMethod(new ScrollingMovementMethod());
+                                                cardAnswerText = (TextView) findViewById(R.id.cardAnswerText);
+                                                cardAnswerText.setMovementMethod(new ScrollingMovementMethod());
+
                                             }
 
                                         } else {
@@ -175,7 +184,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                                     }
                                 });
                     }
-                    //  displayQuestion();
                 }
             } else {
                 cardsPopulated = false;
@@ -200,36 +208,55 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(LOG_TAG, "CardNum of: " + cardNum + " is less than cardCount of "
                                 + cardCount + ". Calling displayQuestion");
                         displayQuestion();
-                    } else {
-                        Log.d(LOG_TAG, "No more cards left");
-                        cardQuestionText.setText(R.string.no_more_cards_button_text);
-                        cardCategoryText.setText(null);
-                        cardAnswerText.setVisibility(View.INVISIBLE);
-                        moreButton.setVisibility(View.INVISIBLE);
-                        advanceButton.setEnabled(false);
                     }
                 }
             }
         });
 
         //TODO Make the button open the link
-        moreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
-                dialog.setPositiveButton(R.string.open_link_text, null)
-                        .setMessage(moreValue)
-                        .create();
+        if (!isMoreHttp()) {
+            moreButton.setOnClickListener(new View.OnClickListener() {
 
-                dialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-        });
+                @Override
+                public void onClick(View view) {
+
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
+                    dialog.setPositiveButton("Okay", null)
+                            .setMessage(moreValue)
+                            .create();
+
+                    dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }
+            });
+
+        } else {
+
+            moreButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
+                    dialog.setPositiveButton(R.string.open_link_text, null)
+                            .setMessage(moreValue)
+                            .create();
+
+                    dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }
+            });
+
+        }
 
     }
 
@@ -269,11 +296,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.fabDelete:
 
 
-
-
-
-
-
                 //TODO delete card in Firebase
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
@@ -281,14 +303,13 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(LOG_TAG, "Deleting this card FOREVER!");
-                        //       db.cardModel().delete(card);
 
                         Toast.makeText(getApplicationContext(),
                                 "Hope you didn't want that - it's gone!", Toast.LENGTH_LONG);
                     }
                 });
 
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -337,23 +358,14 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         cardQuestionText.setText(card.getQuestion());
         cardAnswerText.setText(card.getAnswer());
         cardCategoryText.setText(card.getCategory());
-        // moreValue = card.getMore();
-        moreValue = "test";
+        moreValue = card.getMore();
 
-        if (moreValue.length() < 1) {
-            hasMoreContent = false;
-            moreButton.setVisibility(View.INVISIBLE);
-            Log.d(LOG_TAG, "Setting hasMoreContent to False");
-            Log.d(LOG_TAG, "More is equal to: " + moreValue);
-
-        } else {
-            hasMoreContent = true;
+        if (hasMoreContent()) {
             moreButton.setVisibility(View.VISIBLE);
-            Log.d(LOG_TAG, "Setting hasMoreContent to True");
-            Log.d(LOG_TAG, "More is equal to: " + moreValue);
+        } else {
+            moreButton.setVisibility(View.INVISIBLE);
         }
     }
-
 
     public void animateFAB() {
 
@@ -395,4 +407,32 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private boolean hasMoreContent() {
+        if (moreValue.length() < 1) {
+            hasMoreContent = false;
+            Log.d(LOG_TAG, "Setting hasMoreContent to False");
+            Log.d(LOG_TAG, "More is equal to: " + moreValue);
+            return false;
+
+        } else {
+            hasMoreContent = true;
+            Log.d(LOG_TAG, "Setting hasMoreContent to True");
+            Log.d(LOG_TAG, "More is equal to: " + moreValue);
+
+            if (isMoreHttp()) {
+
+
+            }
+
+            return true;
+        }
+    }
+
+    private boolean isMoreHttp() {
+        if (moreValue.contains("http")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
