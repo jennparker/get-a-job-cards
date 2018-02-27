@@ -7,6 +7,7 @@ public class Constants {
     public static final String CARD_ANSWER = "answer";
     public static final String CARD_CATEGORY = "category";
     public static final String CARD_MORE = "more";
+    public static final String CARD_ID = "id";
 
     public static final String CARD_COLLECTION_NAME = "cards";
     public static final String CARD_DOCUMENT_NAME = "card";
@@ -22,7 +23,7 @@ public class Constants {
     public static final String EDIT_TEXT_ANSWER_KEY = "current_answer";
     public static final String EDIT_TEXT_CATEGORY_KEY = "current_category";
     public static final String EDIT_TEXT_MORE_KEY = "current_more";
-
+    public static final String EDIT_TEXT_ID_KEY = "current_id";
 
     public static final String CATEGORY_STATE = "origin";
 

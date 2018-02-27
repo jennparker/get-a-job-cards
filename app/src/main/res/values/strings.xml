@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">.J.O.B.</string>
+    <string name="app_name">Flashie</string>
 
     <!--Settings-->
     <string name="action_settings">Settings</string>
@@ -17,10 +17,10 @@
     <string name="no_more_cards_button_text">There are no more cards.</string>
     <string name="more_button_text">more</string>
 
-    <string name="sampleQuestionText">Good things come to those who wait....</string>
+    <string name="sampleQuestionText">Wait for it...</string>
     <string name="sampleAnswerText">Let\'s go!</string>
     <string name="sampleButtonText">I\'m a button!</string>
-    <string name="sampleCategoryText">Sample Category</string>
+    <string name="sampleCategoryText">Category</string>
     <string name="sampleNumberText">3</string>
     <string name="sample_text_string">Sample more dialog text goes here.</string>
 
@@ -62,5 +62,9 @@
     <string name="card_delete_confirmation">Delete the card?</string>
 
     <string name="cancel_button">cancel</string>
+    <string name="okay">Okay</string>
+    <string name="choose_category_label">Choose a Category</string>
+    <string name="edit_card_label">Edit Card</string>
+    <string name="add_card_label">Add Card</string>
 
 </resources>

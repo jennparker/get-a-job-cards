@@ -14,37 +14,33 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.booisajerk.getajobcards.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:name="com.booisajerk.getajobcards.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="com.booisajerk.getajobcards.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.AddCardActivity"
-            android:label="Add a Card"
+            android:label="@string/add_card_label"
             android:parentActivityName=".CardActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.CardActivity"
-            android:label="Get Smart"
+            android:label="@string/app_name"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.EditCardActivity"
-            android:label="Edit a Card"
+            android:label="@string/edit_card_label"
             android:parentActivityName=".CardActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name="com.booisajerk.getajobcards.CategoryActivity"
-            android:label="Categories"
+            android:label="@string/choose_category_label"
             android:parentActivityName=".CardActivity"
-            android:theme="@style/AppTheme.ActionBar" />
+            android:theme="@style/AppTheme.ActionBar"></activity>
     </application>
 
 </manifest>

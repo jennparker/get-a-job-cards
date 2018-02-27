@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO add search term to edit card method
     //TODO add search term to delete card method
 
+    //TODO Show hide options button on screen tap
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

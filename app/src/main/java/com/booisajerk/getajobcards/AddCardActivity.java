@@ -27,7 +27,6 @@ import java.util.Map;
  * Allows user to add a new card_activity to the question db
  */
 
-
 public class AddCardActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = Constants.LOG_TAG_NAME + AddCardActivity.class.getSimpleName();
@@ -52,31 +51,6 @@ public class AddCardActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-       // Log.d(LOG_TAG, "Current Max ID is : " + getMaxID());
-
-//        Log.d(LOG_TAG, "Initializing instance of Firestore");
-//        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
-//
-//        //TODO use the one that doesn't need the id - auto set it
-//        DocumentReference docRef = firebaseFirestoreDb.collection(Constants.cards_collection).document("2");
-////        DocumentReference docRef = firebaseFirestoreDb.collection("cards")
-////                .orderBy("id", Query.Direction.DESCENDING).limit(1);
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document != null) {
-//                        Log.d(LOG_TAG, "DocumentSnapshot data: " + task.getResult().getData());
-//                    } else {
-//                        Log.d(LOG_TAG, "No such document");
-//                    }
-//                } else {
-//                    Log.d(LOG_TAG, "get failed with ", task.getException());
-//                }
-//            }
-//        });
 
         addQuestionText = findViewById(R.id.question_text_add_card);
         addAnswerText = findViewById(R.id.answer_text_add_card);
@@ -137,20 +111,19 @@ public class AddCardActivity extends AppCompatActivity {
         newCard.put(Constants.CARD_ANSWER, answer);
         newCard.put(Constants.CARD_CATEGORY, category);
         newCard.put(Constants.CARD_MORE, more);
-        firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME).document(Constants.CARD_DOCUMENT_NAME).set(newCard)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME).add(newCard)
+
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(AddCardActivity.this, "Card Added",
-                                Toast.LENGTH_SHORT).show();
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(LOG_TAG, "New card added. DocumentSnapshot written with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddCardActivity.this, "ERROR" + e.toString(),
-                                Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
+                        Log.w(LOG_TAG, "Error adding document", e);
                     }
                 });
     }

@@ -1,7 +1,9 @@
 package com.booisajerk.getajobcards;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,9 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 /**
  * Created by jenniferparker on 8/1/17.
@@ -24,10 +28,11 @@ public class EditCardActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = Constants.LOG_TAG_NAME + EditCardActivity.class.getSimpleName();
 
-    private EditText editQuestionText,editAnswerText,editMoreText,editCategoryText;
+    private EditText editQuestionText, editAnswerText, editMoreText, editCategoryText;
     private Button submitButton;
     private Card card;
-    private String editQuestion,editAnswer,editCategory,editMore;
+    private String editQuestion, editAnswer, editCategory, editMore, editIdString;
+    private int editId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,8 +66,13 @@ public class EditCardActivity extends AppCompatActivity {
         editAnswer = getIntent().getExtras().getString(Constants.EDIT_TEXT_ANSWER_KEY);
         editCategory = getIntent().getExtras().getString(Constants.EDIT_TEXT_CATEGORY_KEY);
         editMore = getIntent().getExtras().getString(Constants.EDIT_TEXT_MORE_KEY);
+        editId = getIntent().getExtras().getInt(Constants.EDIT_TEXT_ID_KEY);
 
-        //Get the intent extras from the Card class
+        editIdString = String.valueOf(editId);
+
+        Log.d(LOG_TAG, "intent Edit id check: " + editId + " questions check: " + editQuestion);
+
+        //Set the intent extras retrieved from the Card class
         editQuestionText.setText(editQuestion);
         editAnswerText.setText(editAnswer);
         editMoreText.setText(editMore);
@@ -72,42 +82,18 @@ public class EditCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Log.d(LOG_TAG, "Submitting edited text");
+                Log.d(LOG_TAG, "Submitting edited card");
 
-                updateCard(editQuestion, editAnswer, editCategory, editMore);
+                String newEditQuestionText = editQuestionText.getText().toString();
+                String newEditAnswerText = editAnswerText.getText().toString();
+                String newEditCategoryText = editCategoryText.getText().toString();
+                String newEditMoreText = editMoreText.getText().toString();
+                Log.d(LOG_TAG, "Setting question to: " + newEditQuestionText
+                + ", setting answer to: " + newEditAnswerText
+                + ", setting category to: " + newEditCategoryText
+                + ", setting more to: " + newEditMoreText);
 
-           //     final FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
-
-               // CollectionReference cards = firebaseFirestoreDb.collection("cards");
-
-                //TODO edit card in Firebase - probably need to add a search for the question in Firebase here...
-
-//                Map<String, Object> card = new HashMap<>();
-//                card.put("question", editQuestionText.getText().toString());
-//                card.put("answer", editAnswerText.getText().toString());
-//                card.put("category", editCategoryText.getText().toString());
-//                card.put("more", editMoreText.getText().toString());
-                //TODO How to set the id to the highest card # +1
-               // cards.document("card").set(card);
-
-
-//                //Insert the values into the card model
-//                card.setQuestion(editQuestionText.getText().toString());
-//                card.setAnswer(editAnswerText.getText().toString());
-//                card.setCategory(editCategoryText.getText().toString());
-//                card.setMore(editMoreText.getText().toString());
-
-            //    Log.d(LOG_TAG, "Inserting values into cardModel");
-                // db.cardModel().insertCard(card);
-
-//                final AlertDialog.Builder dialog = new AlertDialog.Builder(getApplicationContext());
-//                dialog.setPositiveButton("Great!", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                dialog.show();
+                updateCard(newEditQuestionText, newEditAnswerText, newEditCategoryText, newEditMoreText);
 
                 //Hide soft keyboard
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -115,7 +101,7 @@ public class EditCardActivity extends AppCompatActivity {
             }
         });
 
-        //TODO return to the same card in the flash card list
+        //TODO how to return to the same card in the flash card list
 
     }
 
@@ -124,19 +110,43 @@ public class EditCardActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "Update card called");
 
-        //TODO need to add a where statement or something here.
-        DocumentReference card = firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME).document(Constants.CARD_DOCUMENT_NAME);
-        card.update(Constants.CARD_QUESTION, editQuestion);
-        card.update(Constants.CARD_ANSWER, editAnswer);
-        card.update(Constants.CARD_CATEGORY, editCategory);
-        card.update(Constants.CARD_MORE, editMore)
+        card.setQuestion(editQuestion);
+        card.setAnswer(editAnswer);
+        card.setCategory(editCategory);
+        card.setMore(editMore);
+        card.setId(editId);
+
+        firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
+                .document(editIdString)
+                .set(card, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(EditCardActivity.this, "Updated Successfully",
+                        Log.d(LOG_TAG, "Card edited successfully");
+                        Toast.makeText(EditCardActivity.this, "Card Updated",
                                 Toast.LENGTH_SHORT).show();
+
+                        returnToCard();
+
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(LOG_TAG, "Card edit failed");
+            }
+        });
     }
 
+    private void returnToCard() {
+        Log.d(LOG_TAG, "Returning to the edited card in the card list");
+        Intent returnToCardIntent = new Intent(EditCardActivity.this, CardActivity.class);
+
+        returnToCardIntent.putExtra(Constants.EDIT_TEXT_QUESTION_KEY, card.getQuestion());
+        returnToCardIntent.putExtra(Constants.EDIT_TEXT_ANSWER_KEY, card.getAnswer());
+        returnToCardIntent.putExtra(Constants.EDIT_TEXT_MORE_KEY, card.getMore());
+        returnToCardIntent.putExtra(Constants.EDIT_TEXT_CATEGORY_KEY, card.getCategory());
+        returnToCardIntent.putExtra(Constants.EDIT_TEXT_ID_KEY, card.getId());
+
+        startActivity(returnToCardIntent);
+    }
 }

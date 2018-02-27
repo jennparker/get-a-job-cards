@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="12dp">
+    android:layout_centerInParent="true"
+    android:background="@drawable/xxhdpi_background"
+    android:alpha="0.8">
 
     <Button
         android:id="@+id/androidCategoryButton"
@@ -14,18 +16,10 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
-        android:id="@+id/cssCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/androidCategoryButton"
-        android:text="@string/css_category"
-        style="@style/CategoryButtonStyle"/>
-
-    <Button
         android:id="@+id/databaseCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cssCategoryButton"
+        android:layout_below="@+id/androidCategoryButton"
         android:text="@string/database_category"
         style="@style/CategoryButtonStyle"/>
 
@@ -54,18 +48,10 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
-        android:id="@+id/htmlCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/generalCategoryButton"
-        android:text="@string/html_category"
-        style="@style/CategoryButtonStyle"/>
-
-    <Button
         android:id="@+id/interviewCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/htmlCategoryButton"
+        android:layout_below="@+id/gitCategoryButton"
         android:text="@string/interview_category"
         style="@style/CategoryButtonStyle"/>
 
@@ -78,18 +64,10 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
-        android:id="@+id/javaScriptCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/javaCategoryButton"
-        android:text="@string/javaScript_category"
-        style="@style/CategoryButtonStyle"/>
-
-    <Button
         android:id="@+id/sqlCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/javaScriptCategoryButton"
+        android:layout_below="@+id/javaCategoryButton"
         android:text="@string/sql_category"
         style="@style/CategoryButtonStyle"/>
 
