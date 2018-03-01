@@ -40,7 +40,6 @@ public class EditCardActivity extends AppCompatActivity {
 
         setContentView(R.layout.edit_card);
 
-        //Instantiate a new card to insert the intent values into
         card = new Card();
 
         editQuestionText = findViewById(R.id.question_text_edit_card);

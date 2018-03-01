@@ -44,15 +44,10 @@
     <string name="submit_button_text">Submit</string>
 
     <string name="android_category">Android</string>
-    <string name="css_category">CSS</string>
-    <string name="database_category">Databases</string>
     <string name="effective_java_category">Effective Java</string>
     <string name="general_category">General</string>
-    <string name="git_category">Git</string>
-    <string name="html_category">HTML</string>
     <string name="interview_category">Interview Problems</string>
     <string name="java_category">Java</string>
-    <string name="javaScript_category">JavaScript</string>
     <string name="sql_category">SQL</string>
     <string name="all_categories">all</string>
 

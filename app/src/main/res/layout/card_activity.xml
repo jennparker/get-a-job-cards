@@ -55,6 +55,7 @@
         app:backgroundTint="@color/colorAccent"
         app:pressedTranslationZ="12dp"
         android:src="@drawable/ic_build_black_24dp"
+        android:visibility="invisible"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 

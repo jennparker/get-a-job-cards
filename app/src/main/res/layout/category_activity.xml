@@ -16,18 +16,10 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
-        android:id="@+id/databaseCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/androidCategoryButton"
-        android:text="@string/database_category"
-        style="@style/CategoryButtonStyle"/>
-
-    <Button
         android:id="@+id/effectiveJavaCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/databaseCategoryButton"
+        android:layout_below="@+id/androidCategoryButton"
         android:text="@string/effective_java_category"
         style="@style/CategoryButtonStyle"/>
 
@@ -40,18 +32,10 @@
         style="@style/CategoryButtonStyle"/>
 
     <Button
-        android:id="@+id/gitCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/generalCategoryButton"
-        android:text="@string/git_category"
-        style="@style/CategoryButtonStyle"/>
-
-    <Button
         android:id="@+id/interviewCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/gitCategoryButton"
+        android:layout_below="@+id/generalCategoryButton"
         android:text="@string/interview_category"
         style="@style/CategoryButtonStyle"/>
 

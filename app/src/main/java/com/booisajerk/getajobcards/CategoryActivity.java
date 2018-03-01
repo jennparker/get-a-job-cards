@@ -18,8 +18,8 @@ public class CategoryActivity extends AppCompatActivity {
     private static final String LOG_TAG = Constants.LOG_TAG_NAME + CategoryActivity.class.getSimpleName();
 
 
-    private Button androidButton, cssButton, databaseButton, effectiveJavaButton, generalButton, gitButton, htmlButton,
-            interviewButton, javaButton, javaScriptButton, sqlButton;
+    private Button androidButton, effectiveJavaButton, generalButton,
+            interviewButton, javaButton, sqlButton;
 
     private String categoryName;
 
@@ -31,15 +31,10 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.category_activity);
 
         androidButton = (Button) findViewById(R.id.androidCategoryButton);
-        //  cssButton = (Button) findViewById(R.id.cssCategoryButton);
-        databaseButton = (Button) findViewById(R.id.databaseCategoryButton);
         effectiveJavaButton = (Button) findViewById(R.id.effectiveJavaCategoryButton);
         generalButton = (Button) findViewById(R.id.generalCategoryButton);
-        gitButton = (Button) findViewById(R.id.gitCategoryButton);
-        //   htmlButton = (Button) findViewById(R.id.htmlCategoryButton);
         interviewButton = (Button) findViewById(R.id.interviewCategoryButton);
         javaButton = (Button) findViewById(R.id.javaCategoryButton);
-        //javaScriptButton = (Button) findViewById(R.id.javaScriptCategoryButton);
         sqlButton = (Button) findViewById(R.id.sqlCategoryButton);
     }
 
@@ -54,28 +49,6 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 categoryName = getString(R.string.android_category);
-                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
-                Log.d(LOG_TAG, categoryName + " category selected.");
-                startActivity(intent);
-            }
-        });
-
-//        cssButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                categoryName = getString(R.string.css_category);
-//                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-//                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
-//                Log.d(LOG_TAG, categoryName + " category selected.");
-//                startActivity(intent);
-//            }
-//        });
-
-        databaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                categoryName = getString(R.string.database_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
                 intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
@@ -105,28 +78,6 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
-        gitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                categoryName = getString(R.string.git_category);
-                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
-                Log.d(LOG_TAG, categoryName + " category selected.");
-                startActivity(intent);
-            }
-        });
-
-//        htmlButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                categoryName = getString(R.string.html_category);
-//                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-//                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
-//                Log.d(LOG_TAG, categoryName + " category selected.");
-//                startActivity(intent);
-//            }
-//        });
-
         interviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,17 +99,6 @@ public class CategoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        javaScriptButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                categoryName = getString(R.string.javaScript_category);
-//                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
-//                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
-//                Log.d(LOG_TAG, categoryName + " category selected.");
-//                startActivity(intent);
-//            }
-//        });
 
         sqlButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,6 +13,8 @@ import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -32,7 +34,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import static com.booisajerk.getajobcards.Constants.CATEGORY_STATE;
-import static com.booisajerk.getajobcards.Constants.EDIT_TEXT_ID_KEY;
 //TODO when to use static import for constants
 
 /**
@@ -46,12 +47,15 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean isShowAnswer;
     private boolean hasMoreContent = false;
-    private Boolean isFabOpen = false;
+    private boolean isFabOpen = false;
+    private boolean isOptionsButtonVisible = false;
     private TextView cardCategoryText, cardQuestionText, cardAnswerText, moreButton;
     private Button advanceButton;
     private String moreValue, category, questionId;
     int cardCount, cardNum;
     private Boolean cardsPopulated = false;
+
+    GestureDetector gestureDetector;
 
     DocumentReference docRef;
 
@@ -78,7 +82,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(LOG_TAG, "OnCreate Called");
 
         setContentView(R.layout.card_activity);
-
 
 
         cardList = new ArrayList<Card>();
@@ -183,6 +186,14 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(LOG_TAG, "Intent is null. Fix this.");
             }
         }
+
+        // Create an object of the AndroidGestureDetector  Class
+        AndroidGestureDetector androidGestureDetector = new AndroidGestureDetector();
+        Log.d(LOG_TAG, "Creating a Gesture Detector object");
+
+        // Create a GestureDetector
+        gestureDetector = new GestureDetector(this, androidGestureDetector);
+
     }
 
     @Override
@@ -380,27 +391,10 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     public void animateFAB() {
 
         if (isFabOpen) {
-            optionsFab.startAnimation(rotate_backward);
-            addCardFab.startAnimation(fab_close);
-            editCardFab.startAnimation(fab_close);
-            deleteCardFab.startAnimation(fab_close);
-            addCardFab.setClickable(false);
-            editCardFab.setClickable(false);
-            deleteCardFab.setClickable(false);
-            isFabOpen = false;
-            Log.d(LOG_TAG, "closing fabs");
-
+           closeFab();
         } else {
+            openFab();
 
-            optionsFab.startAnimation(rotate_forward);
-            addCardFab.startAnimation(fab_open);
-            editCardFab.startAnimation(fab_open);
-            deleteCardFab.startAnimation(fab_open);
-            addCardFab.setClickable(true);
-            editCardFab.setClickable(true);
-            deleteCardFab.setClickable(true);
-            isFabOpen = true;
-            Log.d(LOG_TAG, "opening fabs");
         }
     }
 
@@ -473,6 +467,138 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void displayOptionsButton() {
+        Log.d(LOG_TAG, "Displaying options button.");
+        optionsFab.setVisibility(View.VISIBLE);
+        isOptionsButtonVisible = true;
+    }
+
+    private void hideOptionsButton() {
+        Log.d(LOG_TAG, "Hiding options button.");
+        optionsFab.setVisibility(View.INVISIBLE);
+        isOptionsButtonVisible = false;
+    }
+
+    private void closeFab() {
+        optionsFab.startAnimation(rotate_backward);
+        addCardFab.startAnimation(fab_close);
+        editCardFab.startAnimation(fab_close);
+        deleteCardFab.startAnimation(fab_close);
+        addCardFab.setClickable(false);
+        editCardFab.setClickable(false);
+        deleteCardFab.setClickable(false);
+        isFabOpen = false;
+        Log.d(LOG_TAG, "closing fabs");
+    }
+
+    private void openFab() {
+        optionsFab.startAnimation(rotate_forward);
+        addCardFab.startAnimation(fab_open);
+        editCardFab.startAnimation(fab_open);
+        deleteCardFab.startAnimation(fab_open);
+        addCardFab.setClickable(true);
+        editCardFab.setClickable(true);
+        deleteCardFab.setClickable(true);
+        isFabOpen = true;
+        Log.d(LOG_TAG, "opening fabs");
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+
+        return super.onTouchEvent(event);
+        // Return true if you have consumed the event, false if you haven't.
+        // The default implementation always returns false.
+    }
+
+    class AndroidGestureDetector implements GestureDetector.OnGestureListener,
+            GestureDetector.OnDoubleTapListener {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            Log.d(LOG_TAG, " onDown");
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            Log.d(LOG_TAG, " onSingleTapConfirmed");
+            if(isOptionsButtonVisible) {
+//                if(isFabOpen) {
+//                    optionsFab.startAnimation(rotate_backward);
+//                }
+               hideOptionsButton();
+            } else {
+                displayOptionsButton();
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            Log.d(LOG_TAG, "onSingleTapUp");
+            return true;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+            Log.d(LOG_TAG, " onShowPress");
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            Log.d(LOG_TAG, " onDoubleTap");
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            Log.d(LOG_TAG, " onDoubleTapEvent");
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            Log.d(LOG_TAG, " onLongPress");
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+
+            Log.d(LOG_TAG, " onScroll");
+            if (e1.getY() < e2.getY()) {
+                Log.d(LOG_TAG, " Scroll Down");
+            }
+            if (e1.getY() > e2.getY()) {
+                Log.d(LOG_TAG, " Scroll Up");
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() < e2.getX()) {
+                Log.d(LOG_TAG, "Left to Right swipe: " + e1.getX() + " - " + e2.getX());
+                Log.d("Speed ", String.valueOf(velocityX) + " pixels/second");
+            }
+            if (e1.getX() > e2.getX()) {
+                Log.d(LOG_TAG, "Right to Left swipe: " + e1.getX() + " - " + e2.getX());
+                Log.d("Speed ", String.valueOf(velocityX) + " pixels/second");
+            }
+            if (e1.getY() < e2.getY()) {
+                Log.d(LOG_TAG, "Up to Down swipe: " + e1.getX() + " - " + e2.getX());
+                Log.d("Speed ", String.valueOf(velocityY) + " pixels/second");
+            }
+            if (e1.getY() > e2.getY()) {
+                Log.d(LOG_TAG, "Down to Up swipe: " + e1.getX() + " - " + e2.getX());
+                Log.d("Speed ", String.valueOf(velocityY) + " pixels/second");
+            }
+            return true;
+
         }
     }
 }
