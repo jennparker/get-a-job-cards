@@ -1,5 +1,6 @@
 package com.booisajerk.getajobcards;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -52,7 +55,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     private TextView cardCategoryText, cardQuestionText, cardAnswerText, moreButton;
     private Button advanceButton;
     private String moreValue, category, questionId;
-    int cardCount, cardNum;
+    int cardCount, cardNum, cardId;
     private Boolean cardsPopulated = false;
 
     GestureDetector gestureDetector;
@@ -264,6 +267,8 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             case R.id.fabDelete:
+                cardId = card.getId();
+                Log.d(LOG_TAG, "Onclick button ID is: " + cardId);
 
                 //TODO delete card in Firebase
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -274,9 +279,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
                         Log.d(LOG_TAG, "Okay, we're gonna delete it...");
                         deleteCard();
-
-                        Toast.makeText(getApplicationContext(),
-                                "Hope you didn't want that - it's gone!", Toast.LENGTH_LONG);
                     }
                 });
 
@@ -317,6 +319,11 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getCurrentCard() {
 
+        //TODO move this out of this method so it is called less frequently
+        //TODO change this so height is calculated with non-deprecated code
+        Display screen = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int tVHeight = screen.getHeight()/5;
+
         Log.d(LOG_TAG, "Get current card called.");
 
         card = cardList.get(cardNum);
@@ -326,10 +333,19 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.d(LOG_TAG, "Get Current Card: Current card id is: " + card.getId() + " question is: " + card.getQuestion());
 
+        //Setting a consistent text view height
+        cardQuestionText.setHeight(tVHeight);
+        cardAnswerText.setHeight(tVHeight);
+
+        //Reset question and answer to top of their views
+        cardQuestionText.scrollTo(0,0);
+        cardAnswerText.scrollTo(0,0);
+
         cardQuestionText.setText(card.getQuestion());
         cardAnswerText.setText(card.getAnswer());
         cardCategoryText.setText(card.getCategory());
         moreValue = card.getMore();
+        questionId = String.valueOf(card.getId());
 
         if (hasMoreContent()) {
             moreButton.setVisibility(View.VISIBLE);
@@ -391,7 +407,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     public void animateFAB() {
 
         if (isFabOpen) {
-           closeFab();
+            closeFab();
         } else {
             openFab();
 
@@ -399,8 +415,12 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void deleteCard() {
+        Log.d(LOG_TAG, "Delete card called");
 
-        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
+        Log.d(LOG_TAG, "Current card question is: " + card.getQuestion());
+
+        final FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
+
         firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
                 .whereEqualTo(Constants.CARD_QUESTION, card.getQuestion())
                 .get()
@@ -410,35 +430,14 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot document : task.getResult()) {
 
-                                questionId = task.getResult().getDocuments().get(0).getId();
-                                Log.d(LOG_TAG, "question id is = " + questionId);
-
-                                Log.d(LOG_TAG, "document data is = " + task.getResult().getDocuments().get(0).getData());
-
-                                docRef = task.getResult().getDocuments().get(0).getReference();
-
-                                Log.d(LOG_TAG, "document reference is = " + docRef);
+                                Log.d(LOG_TAG, "document reference is = " + document.getReference().delete());
+                                Toast.makeText(CardActivity.this, "Card Deleted",
+                                        Toast.LENGTH_SHORT).show();
                             }
 
                         } else {
                             Log.d(LOG_TAG, "Error getting documents: ", task.getException());
                         }
-                    }
-                });
-
-        //TODO fix this - crashing
-
-        firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME).document(docRef.toString()).delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(LOG_TAG, "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(LOG_TAG, "Error deleting document", e);
                     }
                 });
     }
@@ -527,11 +526,11 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             Log.d(LOG_TAG, " onSingleTapConfirmed");
-            if(isOptionsButtonVisible) {
+            if (isOptionsButtonVisible) {
 //                if(isFabOpen) {
 //                    optionsFab.startAnimation(rotate_backward);
 //                }
-               hideOptionsButton();
+                hideOptionsButton();
             } else {
                 displayOptionsButton();
             }

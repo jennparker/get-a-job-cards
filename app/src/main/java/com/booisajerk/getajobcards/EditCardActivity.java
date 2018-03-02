@@ -115,9 +115,12 @@ public class EditCardActivity extends AppCompatActivity {
         card.setMore(editMore);
         card.setId(editId);
 
+        Log.d(LOG_TAG, "Updated card id: " + editId);
+
         firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
                 .document(editIdString)
-                .set(card, SetOptions.merge())
+                .set(card)
+              //  .set(card, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
