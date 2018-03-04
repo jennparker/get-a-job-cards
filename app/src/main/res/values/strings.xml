@@ -49,7 +49,7 @@
     <string name="interview_category">Interview Problems</string>
     <string name="java_category">Java</string>
     <string name="sql_category">SQL</string>
-    <string name="all_categories">all</string>
+    <string name="all_categories">All</string>
 
     <string name="action_add_card_to_firebase">Add dummy card in Firebase</string>
     <string name="action_read_card_from_firebase">Read card from Firebase</string>

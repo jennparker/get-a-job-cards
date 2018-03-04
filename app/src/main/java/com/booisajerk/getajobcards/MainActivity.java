@@ -33,19 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO card_activity flip animation
     //TODO use ViewPager for cards
-    //TODO shuffle questions
     //TODO how to control new line break
     //TODO add hyperlinks
 
     //TODO work in background thread
     //TODO questions resetting on rotation
     //TODO use singleton design pattern for accessing db
-
-    //TODO how to autoadd ID for add card
-    //TODO add search term to edit card method
-    //TODO add search term to delete card method
-
-    //TODO Show hide options button on screen tap
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CardActivity.class);
-                intent.putExtra(Constants.CATEGORY_STATE, R.string.all_categories);
-                Log.d(LOG_TAG, "Starting Card activity.");
+                intent.putExtra(Constants.CATEGORY_STATE, getString(R.string.all_categories));
+                Log.d(LOG_TAG,  "All category selected");
                 startActivity(intent);
             }
         });

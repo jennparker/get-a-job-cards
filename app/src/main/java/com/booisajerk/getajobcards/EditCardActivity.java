@@ -120,7 +120,6 @@ public class EditCardActivity extends AppCompatActivity {
         firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
                 .document(editIdString)
                 .set(card)
-              //  .set(card, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

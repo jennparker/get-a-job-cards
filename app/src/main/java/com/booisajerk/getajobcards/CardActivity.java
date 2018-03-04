@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.booisajerk.getajobcards.Constants.CATEGORY_STATE;
 //TODO when to use static import for constants
@@ -54,14 +55,10 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isOptionsButtonVisible = false;
     private TextView cardCategoryText, cardQuestionText, cardAnswerText, moreButton;
     private Button advanceButton;
-    private String moreValue, category, questionId;
+    private String moreValue, category;
     int cardCount, cardNum, cardId;
     private Boolean cardsPopulated = false;
-
     GestureDetector gestureDetector;
-
-    DocumentReference docRef;
-
     ArrayList<Card> cardList;
 
     private Card card;
@@ -119,7 +116,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
             if (!cardsPopulated) {
                 if (category != null) {
                     Log.d(LOG_TAG, "Selected category is " + category);
-                    if (category.equals("all")) {
+                    if (category.equals(getString(R.string.all_categories))) {
                         Log.d(LOG_TAG, "Loading ALL categories.");
 
                         firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
@@ -267,10 +264,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             case R.id.fabDelete:
-                cardId = card.getId();
-                Log.d(LOG_TAG, "Onclick button ID is: " + cardId);
-
-                //TODO delete card in Firebase
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
                 dialog.setPositiveButton(R.string.card_delete_confirmation, new DialogInterface.OnClickListener() {
@@ -324,10 +317,15 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         Display screen = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int tVHeight = screen.getHeight()/5;
 
-        Log.d(LOG_TAG, "Get current card called.");
 
-        card = cardList.get(cardNum);
+        Random randomGenerator = new Random();
 
+        //Getting a random number
+        int randomCardNumber = randomGenerator.nextInt(cardList.size());
+
+        Log.d(LOG_TAG, "Get current card called for card number: " + cardNum);
+
+        card = cardList.get(randomCardNumber);
 
         Log.d(LOG_TAG, "Card's Category is: " + card.getCategory() + ". Selected category is " + category);
 
@@ -345,7 +343,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         cardAnswerText.setText(card.getAnswer());
         cardCategoryText.setText(card.getCategory());
         moreValue = card.getMore();
-        questionId = String.valueOf(card.getId());
 
         if (hasMoreContent()) {
             moreButton.setVisibility(View.VISIBLE);
@@ -385,7 +382,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                         // dialog.setPositiveButton(R.string.open_link_text, null)
                         dialog.setMessage(linkString)
                                 .create();
-
 
                         dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -454,7 +450,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
             hasMoreContent = true;
             Log.d(LOG_TAG, "Setting hasMoreContent to True");
             Log.d(LOG_TAG, "More is equal to: " + moreValue);
-
             return true;
         }
     }
@@ -510,8 +505,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         gestureDetector.onTouchEvent(event);
 
         return super.onTouchEvent(event);
-        // Return true if you have consumed the event, false if you haven't.
-        // The default implementation always returns false.
     }
 
     class AndroidGestureDetector implements GestureDetector.OnGestureListener,
@@ -527,9 +520,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         public boolean onSingleTapConfirmed(MotionEvent e) {
             Log.d(LOG_TAG, " onSingleTapConfirmed");
             if (isOptionsButtonVisible) {
-//                if(isFabOpen) {
-//                    optionsFab.startAnimation(rotate_backward);
-//                }
                 hideOptionsButton();
             } else {
                 displayOptionsButton();

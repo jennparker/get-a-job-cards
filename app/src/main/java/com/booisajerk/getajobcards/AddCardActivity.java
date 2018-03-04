@@ -39,7 +39,6 @@ public class AddCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate called.");
         setContentView(R.layout.add_card);
-
     }
 
     @Override
@@ -69,7 +68,6 @@ public class AddCardActivity extends AppCompatActivity {
                     String categoryString = addCategoryText.getText().toString();
                     String moreString = addMoreText.getText().toString();
 
-
                     addNewCard(questionString, answerString, categoryString, moreString);
 
                     Log.d(LOG_TAG, "Resetting add card fields.");
@@ -80,27 +78,6 @@ public class AddCardActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    //TODO delete this
-    private static void addID() {
-        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
-        for (int i = 1; i < 448; i++) {
-            DocumentReference cardRef = firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME).document(String.valueOf(i));
-            Log.d(LOG_TAG, "Card reference is: " + cardRef.getId() + " updating ID column");
-            cardRef.update("id", i);
-        }
-    }
-
-    //TODO This crashes
-    private String getMaxID() {
-        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
-        String firstVal = null;
-
-        firstVal = firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME).orderBy("id", Query.Direction.DESCENDING)
-                .get().getResult().getDocuments().get(0).get("id").toString();
-        Log.d(LOG_TAG, firstVal);
-        return firstVal;
     }
 
     private void addNewCard(String question, String answer, String category, String more) {
