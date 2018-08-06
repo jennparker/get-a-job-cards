@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +17,8 @@ public class CategoryActivity extends AppCompatActivity {
     private static final String LOG_TAG = Constants.LOG_TAG_NAME + CategoryActivity.class.getSimpleName();
 
 
-    private Button androidButton, effectiveJavaButton, generalButton,
-            interviewButton, javaButton, sqlButton;
+    private Button androidButton, answerThisButton, bugsButton, dataStructuresButton, effectiveJavaButton, generalButton,
+            interviewButton, javaButton, kotlinButton;
 
     private String categoryName;
 
@@ -30,12 +29,15 @@ public class CategoryActivity extends AppCompatActivity {
 
         setContentView(R.layout.category_activity);
 
-        androidButton = (Button) findViewById(R.id.androidCategoryButton);
-        effectiveJavaButton = (Button) findViewById(R.id.effectiveJavaCategoryButton);
-        generalButton = (Button) findViewById(R.id.generalCategoryButton);
-        interviewButton = (Button) findViewById(R.id.interviewCategoryButton);
-        javaButton = (Button) findViewById(R.id.javaCategoryButton);
-        sqlButton = (Button) findViewById(R.id.sqlCategoryButton);
+        androidButton = findViewById(R.id.androidCategoryButton);
+        dataStructuresButton = findViewById(R.id.dataStructuresCategoryButton);
+        effectiveJavaButton = findViewById(R.id.effectiveJavaCategoryButton);
+        generalButton = findViewById(R.id.generalCategoryButton);
+        interviewButton = findViewById(R.id.interviewCategoryButton);
+        javaButton = findViewById(R.id.javaCategoryButton);
+        kotlinButton = findViewById(R.id.kotlinCategoryButton);
+        answerThisButton = findViewById(R.id.answerThisCategoryButton);
+        bugsButton = findViewById(R.id.bugsButton);
     }
 
     @Override
@@ -49,6 +51,17 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 categoryName = getString(R.string.android_category);
+                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
+                Log.d(LOG_TAG, categoryName + " category selected.");
+                startActivity(intent);
+            }
+        });
+
+        dataStructuresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryName = getString(R.string.data_structures_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
                 intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");
@@ -100,10 +113,32 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
-        sqlButton.setOnClickListener(new View.OnClickListener() {
+        kotlinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                categoryName = getString(R.string.sql_category);
+                categoryName = getString(R.string.kotlin_category);
+                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
+                Log.d(LOG_TAG, categoryName + " category selected.");
+                startActivity(intent);
+            }
+        });
+
+        answerThisButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryName = getString(R.string.answer_this_category);
+                Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
+                intent.putExtra(Constants.CATEGORY_STATE, categoryName);
+                Log.d(LOG_TAG, categoryName + " category selected.");
+                startActivity(intent);
+            }
+        });
+
+        bugsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryName = getString(R.string.bugs_category);
                 Intent intent = new Intent(CategoryActivity.this, CardActivity.class);
                 intent.putExtra(Constants.CATEGORY_STATE, categoryName);
                 Log.d(LOG_TAG, categoryName + " category selected.");

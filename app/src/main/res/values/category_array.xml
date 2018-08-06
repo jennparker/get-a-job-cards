@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_options">
+        <item>@string/android_category</item>
+        <item>@string/data_structures_category</item>
+        <item>@string/effective_java_category</item>
+        <item>@string/general_category</item>
+        <item>@string/interview_category</item>
+        <item>@string/java_category</item>
+        <item>@string/answer_this_category</item>
+        <item>@string/bugs_category</item>
+    </string-array>
+</resources>
