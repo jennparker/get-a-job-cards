@@ -26,6 +26,4 @@ public class Constants {
     public static final String EDIT_TEXT_ID_KEY = "current_id";
 
     public static final String CATEGORY_STATE = "origin";
-
-
 }

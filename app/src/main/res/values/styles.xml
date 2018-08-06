@@ -24,7 +24,7 @@
 
     <style name="AppTheme.ActionBar">
         <item name="windowActionBar">true</item>
-    <item name="windowNoTitle">false</item>
+        <item name="windowNoTitle">false</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -39,15 +39,16 @@
     </style>
 
     <style name="CategoryButtonStyle">
+        <item name="android:paddingStart">@dimen/button_padding</item>
+        <item name="android:paddingEnd">@dimen/button_padding</item>
         <item name="android:textAlignment">center</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">10dp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">22sp</item>
         <item name="android:background">@drawable/button_shape</item>
         <item name="android:shadowColor">#A8A8A8</item>
         <item name="android:shadowRadius">2</item>
-
     </style>
 
 </resources>
