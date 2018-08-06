@@ -46,13 +46,10 @@
         android:layout_height="wrap_content"
         android:text="@string/category_title_text" />
 
-
-    <EditText
-        android:id="@+id/category_text_add_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Add category here" />
-
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/submit_button"
