@@ -275,7 +275,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
-                dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -354,11 +354,11 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(View view) {
 
                         final AlertDialog.Builder dialog = new AlertDialog.Builder(CardActivity.this);
-                        dialog.setPositiveButton(R.string.okay, null)
+                        dialog.setPositiveButton(android.R.string.ok, null)
                                 .setMessage(moreValue)
                                 .create();
 
-                        dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
                             }
@@ -383,7 +383,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                         dialog.setMessage(linkString)
                                 .create();
 
-                        dialog.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                        dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
                             }

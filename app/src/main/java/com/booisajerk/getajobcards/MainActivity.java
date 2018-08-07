@@ -29,16 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = Constants.LOG_TAG_NAME + MainActivity.class.getSimpleName();
 
     private Toolbar toolbar;
-    private Button categorySelectionButton, allCardsButton;
-
-    //TODO card_activity flip animation
-    //TODO use ViewPager for cards
-    //TODO how to control new line break
-    //TODO add hyperlinks
-
-    //TODO work in background thread
-    //TODO questions resetting on rotation
-    //TODO use singleton design pattern for accessing db
+    private Button categorySelectionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
                 Log.d(LOG_TAG, "Starting CategoryActivity activity");
-                startActivity(intent);
-            }
-        });
-
-        allCardsButton = (Button) findViewById(R.id.allCardsButton);
-        allCardsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CardActivity.class);
-                intent.putExtra(Constants.CATEGORY_STATE, getString(R.string.all_categories));
-                Log.d(LOG_TAG,  "All category selected");
                 startActivity(intent);
             }
         });
