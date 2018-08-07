@@ -1,27 +1,43 @@
 package com.booisajerk.getajobcards;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.os.Handler;
+
 
 /**
  * Created by jenniferparker on 7/24/17.
  */
 
-public class SplashActivity extends AppCompatActivity {
-
-    private static final String LOG_TAG = Constants.LOG_TAG_NAME + SplashActivity.class.getSimpleName();
+public class SplashActivity extends Activity {
+    private Handler mWaitHandler = new Handler();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.splashscreen);
 
-        Log.d(LOG_TAG, "Showing splash screen");
+        mWaitHandler.postDelayed(new Runnable() {
 
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
-        finish();
+            @Override
+            public void run() {
+                try {
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+
+                    finish();
+                } catch (Exception ignored) {
+                    ignored.printStackTrace();
+                }
+            }
+        }, 3000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mWaitHandler.removeCallbacksAndMessages(null);
     }
 }

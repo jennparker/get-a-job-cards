@@ -1,4 +1,10 @@
 <resources>
+
+    <!--Splash-->
+    <dimen name="splash_text_size">40sp</dimen>
+    <dimen name="splash_layout_margin">54dp</dimen>
+
+    <!--Card-->
     <dimen name="card_text_size">24sp</dimen>
     <dimen name="card_more_text_size">20sp</dimen>
 
