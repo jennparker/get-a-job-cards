@@ -26,19 +26,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import static com.booisajerk.getajobcards.Constants.CATEGORY_STATE;
-//TODO when to use static import for constants
 
 /**
  * Created by jenniferparker on 7/30/17.
@@ -78,15 +76,15 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Log.d(LOG_TAG, "OnCreate Called");
 
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.card_activity);
 
         cardList = new ArrayList<Card>();
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d(LOG_TAG, "Creating new instance of firestore");
-        FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
 
         cardNum = 1;
         advanceButton = findViewById(R.id.advanceButton);
@@ -95,6 +93,12 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         deleteCardFab = findViewById(R.id.fabDelete);
         editCardFab = findViewById(R.id.fabEdit);
         addCardFab = findViewById(R.id.fabAdd);
+
+        cardCategoryText = findViewById(R.id.categoryText);
+        cardQuestionText = findViewById(R.id.cardQuestionText);
+        cardQuestionText.setMovementMethod(new ScrollingMovementMethod());
+        cardAnswerText = findViewById(R.id.cardAnswerText);
+        cardAnswerText.setMovementMethod(new ScrollingMovementMethod());
 
 //        if (savedInstanceState != null) {
 //            cardCategoryText.setText(savedInstanceState.getString(Constants.INSTANCE_STATE_CATEGORY_KEY));
@@ -109,90 +113,62 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
         if (getIntent().getExtras() != null) {
             Log.d(LOG_TAG, "Getting values from Category intent");
-
             category = getIntent().getExtras().getString(CATEGORY_STATE);
-
             if (!cardsPopulated) {
                 if (category != null) {
                     Log.d(LOG_TAG, "Selected category is " + category);
                     if (category.equals(getString(R.string.all_categories))) {
                         Log.d(LOG_TAG, "Loading ALL categories.");
-
-                        firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
+                        db.collection(Constants.CARD_COLLECTION_NAME)
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            for (DocumentSnapshot document : task.getResult()) {
-                                                cardCount = task.getResult().size();
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                Log.d(LOG_TAG, document.getId() + " => " + document.getData());
                                                 card = document.toObject(Card.class);
-
-                                                Log.d(LOG_TAG, "Card question is: " + card.getQuestion());
-
                                                 cardList.add(card);
                                             }
                                             cardsPopulated = true;
-
-                                            cardCategoryText = (TextView) findViewById(R.id.categoryText);
-                                            cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
-                                            cardQuestionText.setMovementMethod(new ScrollingMovementMethod());
-                                            cardAnswerText = (TextView) findViewById(R.id.cardAnswerText);
-                                            cardAnswerText.setMovementMethod(new ScrollingMovementMethod());
-
+                                            cardCount = cardList.size();
                                         } else {
-                                            Log.d(LOG_TAG, "Error getting documents: ", task.getException());
-                                            cardsPopulated = false;
+                                            Log.w(LOG_TAG, "Error getting documents.", task.getException());
                                         }
                                     }
                                 });
                     } else {
                         Log.d(LOG_TAG, "Calling category cards for: " + category);
-                        firebaseFirestoreDb.collection(Constants.CARD_COLLECTION_NAME)
+                        db.collection(Constants.CARD_COLLECTION_NAME)
                                 .whereEqualTo(Constants.CARD_CATEGORY, category)
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            for (DocumentSnapshot document : task.getResult()) {
-                                                cardCount = task.getResult().size();
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                Log.d(LOG_TAG, document.getId() + " => " + document.getData());
                                                 card = document.toObject(Card.class);
-
-                                                Log.d(LOG_TAG, "Category specific card question is: " + card.getQuestion());
-                                                Log.d(LOG_TAG, "Category card count is: " + cardCount);
-
                                                 cardList.add(card);
-                                                cardsPopulated = true;
-
-                                                cardCategoryText = (TextView) findViewById(R.id.categoryText);
-                                                cardQuestionText = (TextView) findViewById(R.id.cardQuestionText);
-                                                cardQuestionText.setMovementMethod(new ScrollingMovementMethod());
-                                                cardAnswerText = (TextView) findViewById(R.id.cardAnswerText);
-                                                cardAnswerText.setMovementMethod(new ScrollingMovementMethod());
-
                                             }
-
+                                            cardsPopulated = true;
+                                            cardCount = cardList.size();
                                         } else {
-                                            Log.d(LOG_TAG, "Error getting documents: ", task.getException());
+                                            Log.w(LOG_TAG, "Error getting documents.", task.getException());
                                         }
                                     }
                                 });
                     }
                 }
-            } else {
-                cardsPopulated = false;
-                Log.d(LOG_TAG, "Intent is null. Fix this.");
             }
         }
 
-        // Create an object of the AndroidGestureDetector  Class
+        // Create an object of the AndroidGestureDetector Class
         AndroidGestureDetector androidGestureDetector = new AndroidGestureDetector();
         Log.d(LOG_TAG, "Creating a Gesture Detector object");
 
         // Create a GestureDetector
         gestureDetector = new GestureDetector(this, androidGestureDetector);
-
     }
 
     @Override
@@ -224,8 +200,6 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-
-        //TODO Make the button open the link
     }
 
     @Override
@@ -465,13 +439,13 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
     private void displayOptionsButton() {
         Log.d(LOG_TAG, "Displaying options button.");
-        optionsFab.setVisibility(View.VISIBLE);
+        //   optionsFab.setVisibility(View.VISIBLE);
         isOptionsButtonVisible = true;
     }
 
     private void hideOptionsButton() {
         Log.d(LOG_TAG, "Hiding options button.");
-        optionsFab.setVisibility(View.INVISIBLE);
+        //  optionsFab.setVisibility(View.INVISIBLE);
         isOptionsButtonVisible = false;
     }
 
