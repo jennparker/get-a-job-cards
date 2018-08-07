@@ -1,81 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_centerInParent="true"
-    android:background="@drawable/xxhdpi_background">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/androidCategoryButton"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/android_category"
-        style="@style/CategoryButtonStyle"/>
+        android:background="@drawable/xxhdpi_background"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/dataStructuresCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/androidCategoryButton"
-        android:text="@string/data_structures_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/androidCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/android_category"
+            app:layout_constraintBottom_toTopOf="@id/answerThisCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/effectiveJavaCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dataStructuresCategoryButton"
-        android:text="@string/effective_java_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/answerThisCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kotlinCategoryButton"
+            android:text="@string/answer_this_category"
+            app:layout_constraintBottom_toTopOf="@id/bugsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/androidCategoryButton" />
 
-    <Button
-        android:id="@+id/generalCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/effectiveJavaCategoryButton"
-        android:text="@string/general_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/bugsButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/answerThisCategoryButton"
+            android:text="@string/bugs_category"
+            app:layout_constraintBottom_toTopOf="@id/dataStructuresCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/answerThisCategoryButton" />
 
-    <Button
-        android:id="@+id/interviewCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/generalCategoryButton"
-        android:text="@string/interview_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/dataStructuresCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/androidCategoryButton"
+            android:text="@string/data_structures_category"
+            app:layout_constraintBottom_toTopOf="@id/effectiveJavaCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bugsButton" />
 
-    <Button
-        android:id="@+id/javaCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/interviewCategoryButton"
-        android:text="@string/java_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/effectiveJavaCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dataStructuresCategoryButton"
+            android:text="@string/effective_java_category"
+            app:layout_constraintBottom_toTopOf="@id/generalCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dataStructuresCategoryButton" />
 
-    <Button
-        android:id="@+id/kotlinCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/javaCategoryButton"
-        android:text="@string/kotlin_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/generalCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/effectiveJavaCategoryButton"
+            android:text="@string/general_category"
+            app:layout_constraintBottom_toTopOf="@id/interviewCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/effectiveJavaCategoryButton" />
 
-    <Button
-        android:id="@+id/answerThisCategoryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/kotlinCategoryButton"
-        android:text="@string/answer_this_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/interviewCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/generalCategoryButton"
+            android:text="@string/interview_category"
+            app:layout_constraintBottom_toTopOf="@id/javaCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/generalCategoryButton" />
 
+        <Button
+            android:id="@+id/javaCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/interviewCategoryButton"
+            android:text="@string/java_category"
+            app:layout_constraintBottom_toTopOf="@id/kotlinCategoryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interviewCategoryButton" />
 
-    <Button
-        android:id="@+id/bugsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/answerThisCategoryButton"
-        android:text="@string/bugs_category"
-        style="@style/CategoryButtonStyle"/>
+        <Button
+            android:id="@+id/kotlinCategoryButton"
+            style="@style/CategoryButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/javaCategoryButton"
+            android:text="@string/kotlin_category"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/javaCategoryButton" />
 
-</RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

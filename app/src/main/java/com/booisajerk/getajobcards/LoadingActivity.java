@@ -2,9 +2,11 @@ package com.booisajerk.getajobcards;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.Objects;
 
@@ -18,6 +20,10 @@ public class LoadingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_cards);
+
+        TextView loadingText = findViewById(R.id.loading_text);
+        Typeface typewriterFont = Typeface.createFromAsset(getAssets(), "fonts/lc_smith_5_typewriter.ttf");
+        loadingText.setTypeface(typewriterFont);
 
         mWaitHandler.postDelayed(new Runnable() {
 
