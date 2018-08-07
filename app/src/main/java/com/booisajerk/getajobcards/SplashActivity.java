@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-
 /**
  * Created by jenniferparker on 7/24/17.
  */

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "OnCreate called");
 
-        categorySelectionButton = (Button) findViewById(R.id.categorySelectionButton);
+        categorySelectionButton = findViewById(R.id.categorySelectionButton);
         categorySelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

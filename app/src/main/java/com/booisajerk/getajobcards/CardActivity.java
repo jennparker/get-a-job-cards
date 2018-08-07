@@ -83,19 +83,18 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.card_activity);
 
-
         cardList = new ArrayList<Card>();
 
         Log.d(LOG_TAG, "Creating new instance of firestore");
         FirebaseFirestore firebaseFirestoreDb = FirebaseFirestore.getInstance();
 
         cardNum = 1;
-        advanceButton = (Button) findViewById(R.id.advanceButton);
-        moreButton = (TextView) findViewById(R.id.moreButton);
-        optionsFab = (FloatingActionButton) findViewById(R.id.fabOptions);
-        deleteCardFab = (FloatingActionButton) findViewById(R.id.fabDelete);
-        editCardFab = (FloatingActionButton) findViewById(R.id.fabEdit);
-        addCardFab = (FloatingActionButton) findViewById(R.id.fabAdd);
+        advanceButton = findViewById(R.id.advanceButton);
+        moreButton = findViewById(R.id.moreButton);
+        optionsFab = findViewById(R.id.fabOptions);
+        deleteCardFab = findViewById(R.id.fabDelete);
+        editCardFab = findViewById(R.id.fabEdit);
+        addCardFab = findViewById(R.id.fabAdd);
 
 //        if (savedInstanceState != null) {
 //            cardCategoryText.setText(savedInstanceState.getString(Constants.INSTANCE_STATE_CATEGORY_KEY));
@@ -109,9 +108,9 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 
         if (getIntent().getExtras() != null) {
+            Log.d(LOG_TAG, "Getting values from Category intent");
 
             category = getIntent().getExtras().getString(CATEGORY_STATE);
-            Log.d(LOG_TAG, "Getting values from Category intent");
 
             if (!cardsPopulated) {
                 if (category != null) {
@@ -315,7 +314,7 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         //TODO move this out of this method so it is called less frequently
         //TODO change this so height is calculated with non-deprecated code
         Display screen = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        int tVHeight = screen.getHeight()/5;
+        int tVHeight = screen.getHeight() / 5;
 
 
         Random randomGenerator = new Random();
@@ -336,8 +335,8 @@ public class CardActivity extends AppCompatActivity implements View.OnClickListe
         cardAnswerText.setHeight(tVHeight);
 
         //Reset question and answer to top of their views
-        cardQuestionText.scrollTo(0,0);
-        cardAnswerText.scrollTo(0,0);
+        cardQuestionText.scrollTo(0, 0);
+        cardAnswerText.scrollTo(0, 0);
 
         cardQuestionText.setText(card.getQuestion());
         cardAnswerText.setText(card.getAnswer());
