@@ -102,6 +102,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="24dp"
         android:text="@string/more_button_text"
+        android:visibility="invisible"
         android:layout_centerInParent="true"
         android:textColor="@color/textBackground"
         android:textSize="@dimen/card_more_text_size" />
