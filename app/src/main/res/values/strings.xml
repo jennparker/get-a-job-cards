@@ -17,9 +17,10 @@
     <string name="no_more_cards_button_text">There are no more cards.</string>
     <string name="more_button_text">more</string>
 
-    <string name="sampleQuestionText" tools:ignore="TypographyEllipsis">Wait for it...</string>
+    <string name="sampleQuestionText" tools:ignore="TypographyEllipsis">Click the button below to
+        begin this magical learning journey.</string>
     <string name="sampleAnswerText">Let\'s go!</string>
-    <string name="sampleButtonText">I\'m a button!</string>
+    <string name="sampleButtonText">Let\'s start!</string>
     <string name="sampleCategoryText">Category</string>
     <string name="sampleNumberText">3</string>
     <string name="sample_text_string">Sample more dialog text goes here.</string>
